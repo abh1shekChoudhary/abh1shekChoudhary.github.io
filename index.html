@@ -13,7 +13,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- GoatCounter Analytics Script -->
   <script data-goatcounter="https://abhishekportfolio.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
@@ -153,18 +152,24 @@
         align-items: center;
         gap: 0.5rem;
     }
+    .timeline-date {
+        font-family: 'Space Grotesk', sans-serif;
+        color: #9CA3AF;
+        font-size: 0.9rem;
+    }
   </style>
 </head>
 <body class="min-h-screen relative">
 
   <header class="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-700/50">
-    <div class="max-w-6xl mx-auto px-6 py-4">
+    <div class="max-w-7xl mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
         <a href="#home" class="text-2xl font-bold font-display gradient-title">Abhishek Choudhary</a>
-        <nav class="hidden md:flex space-x-8">
+        <nav class="hidden md:flex space-x-6 lg:space-x-8">
           <a href="#about" class="header-link">About</a>
           <a href="#education" class="header-link">Education</a>
           <a href="#skills" class="header-link">Skills</a>
+          <a href="#experience" class="header-link">Experience</a>
           <a href="#projects" class="header-link">Projects</a>
           <a href="#contact" class="header-link">Contact</a>
         </nav>
@@ -200,7 +205,7 @@
         <div class="card p-8 md:p-12">
             <div class="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto space-y-4">
                 <p>
-                    As a final-year Computer Science student at <span class="highlight">VIT Bhopal</span> with a CGPA of <span class="highlight">8.68</span>, I specialize in Artificial Intelligence and Machine Learning. I am passionate about building intelligent, scalable applications, a skill I've honed by solving over <span class="highlight">500</span> programming and problem-solving questions on various platforms and deploying multiple full-stack projects <span class="highlight">to production</span>.
+                    As a final-year Computer Science student at <span class="highlight">VIT Bhopal</span> with a CGPA of <span class="highlight">8.74</span>, I specialize in Artificial Intelligence and Machine Learning. I am passionate about building intelligent, scalable applications, a skill I've honed by solving over <span class="highlight">500</span> programming and problem-solving questions on various platforms and deploying multiple full-stack projects <span class="highlight">to production</span>.
                 </p>
                 <p>
                     I thrive on transforming complex data into real-world solutions and am actively seeking opportunities where I can contribute to challenging projects in AI/ML and software engineering.
@@ -222,7 +227,7 @@
                 </div>
                 <div class="text-left sm:text-right mt-4 sm:mt-0">
                     <p class="text-gray-300 font-semibold">Expected May 2026</p>
-                    <p class="text-gray-400">CGPA: <span class="highlight">8.68 / 10.0</span></p>
+                    <p class="text-gray-400">CGPA: <span class="highlight">8.74 / 10.0</span></p>
                 </div>
             </div>
         </div>
@@ -260,12 +265,58 @@
                     </div>
                     <p class="text-gray-400 text-sm mb-4">Skilled in building full-stack applications using Spring Boot (backend) and Angular (frontend).</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="tech-tag">Spring Boot</span><span class="tech-tag">Angular</span><span class="tech-tag">WebSockets</span><span class="tech-tag">GitHub</span><span class="tech-tag">Vercel</span><span class="tech-tag">Render</span>
+                        <span class="tech-tag">Spring Boot</span><span class="tech-tag">Angular</span><span class="tech-tag">WebSockets</span><span class="tech-tag">Thymeleaf</span><span class="tech-tag">Vercel</span><span class="tech-tag">Render</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+<section id="experience" class="py-24 px-6 section bg-gray-900/50">
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-4xl font-bold font-display gradient-title mb-12 text-center">Work Experience</h2>
+        
+        <div class="card p-8 md:p-10 relative overflow-hidden">
+             <div class="absolute top-0 right-0 p-8 opacity-5 transform translate-x-4 -translate-y-4">
+                <i data-lucide="briefcase" class="w-32 h-32 text-orange-500"></i>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-2">
+                <div>
+                    <h3 class="text-2xl font-bold text-white">AI/ML Intern</h3>
+                    <h4 class="text-xl text-orange-400 font-semibold mt-1">Cynapse AI</h4>
+                </div>
+                <div class="status-tag mt-1 md:mt-2">
+                    Oct 2025 - Present
+                </div>
+            </div>
+
+            <div class="space-y-4 text-gray-300 text-lg leading-relaxed mb-8">
+                <p>
+                    Collaborating in an Agile team to define product roadmaps and build scalable AI solutions.
+                </p>
+                <ul class="list-disc list-inside space-y-3 text-gray-400">
+                    <li>
+                        Defined a 3-quarter product roadmap for a <span class="highlight">Gen AI agent</span>, projected to boost user productivity by 20-30% by automating workflows across 15+ enterprise applications.
+                    </li>
+                    <li>
+                        Contributed to scalable data pipelines processing <span class="highlight">100,000+ daily events</span> from 10+ APIs, fueling a real-time analytics dashboard.
+                    </li>
+                    <li>
+                        Optimized ETL pipelines to reduce data latency by <span class="highlight">40%</span>, ensuring faster insights for end-users.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+                <span class="tech-tag">Generative AI</span>
+                <span class="tech-tag">ETL Pipelines</span>
+                <span class="tech-tag">Data Analytics</span>
+                <span class="tech-tag">Agile</span>
+            </div>
+        </div>
+    </div>
+</section>
 
   <section id="projects" class="py-24 px-6 section">
     <div class="max-w-6xl mx-auto">
@@ -278,26 +329,24 @@
             <div class="card p-8 flex flex-col justify-between">
                 <div>
                     <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
-                        <h3 class="text-2xl font-bold text-white">Online Multiplayer Mancala Game with AI</h3>
-                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Completed: June 2025</span>
+                        <h3 class="text-2xl font-bold text-white">Online Multiplayer Mancala Game</h3>
+                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Sept 2025</span>
                     </div>
                     <p class="text-orange-400 font-semibold mb-4">
-                        Objective: To build a full-stack, real-time web application featuring online multiplayer and a challenging AI opponent.
+                        Objective: A full-stack, real-time web application featuring online multiplayer and a challenging AI opponent.
                     </p>
                     <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
                         <li>Engineered a robust Java Spring Boot backend using WebSockets for seamless, real-time, two-player gameplay.</li>
-                        <li>Implemented a <span class="highlight">Minimax AI opponent</span> with alpha-beta pruning, providing multiple difficulty levels for offline play.</li>
-                        <li>Built a dynamic, responsive front-end with vanilla JavaScript that renders the game state entirely from server-sent events.</li>
-                        <li>Containerized the application with <span class="highlight">Docker</span> and deployed it on <span class="highlight">AWS EC2</span> and implemented a Caddy reverse proxy for automated <span class="highlight">SSL/TLS  encryption (HTTPS)</span>
-.</li>
+                        <li>Implemented a <span class="highlight">Minimax AI opponent</span> with alpha-beta pruning, providing multiple difficulty levels.</li>
+                        <li>Built a dynamic front-end with vanilla JavaScript that renders the game state entirely from server-sent events.</li>
+                        <li>Deployed on <span class="highlight">AWS EC2</span> with Docker and Caddy reverse proxy for automated <span class="highlight">SSL/TLS (HTTPS)</span>.</li>
                     </ul>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="tech-tag">Java</span>
                         <span class="tech-tag">Spring Boot</span>
                         <span class="tech-tag">WebSockets</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Docker</span>
                         <span class="tech-tag">AWS EC2</span>
+                        <span class="tech-tag">Docker</span>
                     </div>
                 </div>
                            <div class="flex gap-4 mt-auto">
@@ -310,15 +359,15 @@
                 <div>
                     <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
                         <h3 class="text-2xl font-bold text-white">AI-ML Food Preparation Prediction</h3>
-                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Completed: Mar 2025</span>
+                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> June 2025</span>
                     </div>
                     <p class="text-orange-400 font-semibold mb-4">
-                        Objective: To reduce food waste and improve kitchen efficiency by accurately forecasting meal demand using a deep learning model.
+                        Objective: Reduce food waste and improve kitchen efficiency by accurately forecasting meal demand using Deep Learning.
                     </p>
                     <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
                         <li>Engineered a model achieving R² scores of 0.85–0.94, projecting an <span class="highlight">18-25% reduction in food waste</span>.</li>
-                        <li>Architected a data pipeline to generate <span class="highlight">9,000+</span> synthetic datasets, effectively modeling complex food consumption patterns.</li>
-                        <li>Optimized neural networks with early stopping and hyperparameter tuning to ensure high accuracy and prevent overfitting.</li>
+                        <li>Architected a data pipeline to generate <span class="highlight">9,000+</span> synthetic datasets to model complex consumption patterns.</li>
+                        <li>Optimized neural networks with early stopping and hyperparameter tuning to ensure high accuracy.</li>
                     </ul>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="tech-tag">TensorFlow</span><span class="tech-tag">Keras</span><span class="tech-tag">Python</span><span class="tech-tag">Scikit-learn</span>
@@ -333,15 +382,15 @@
                 <div>
                     <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
                         <h3 class="text-2xl font-bold text-white">Mess Management System</h3>
-                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Completed: Nov 2024</span>
+                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Mar 2025</span>
                     </div>
                     <p class="text-orange-400 font-semibold mb-4">
-                        Objective: To design and deploy a full-stack web application to automate billing and record-keeping for over <span class="highlight">6,000 students</span>.
+                        Objective: Design and deploy a full-stack web application to automate billing and record-keeping for 6,000+ students.
                     </p>
                     <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
                         <li>Built a scalable backend with Spring Boot, featuring 10+ RESTful APIs that improved administrative efficiency by <span class="highlight">16–24%</span>.</li>
-                        <li>Developed a responsive and intuitive user interface with Angular to ensure a seamless experience for both students and staff.</li>
-                       <li>Ensured high availability by deploying the containerized backend (Docker) on Render and the frontend on Vercel, and implemented a <span class="highlight">guest login</span> for a frictionless demo experience.</li>
+                        <li>Developed a responsive and intuitive user interface with Angular for both students and staff.</li>
+                       <li>Containerized with Docker and deployed on Render (Backend) and Vercel (Frontend), featuring a <span class="highlight">guest login</span> for easy demos.</li>
                     </ul>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span class="tech-tag">Spring Boot</span><span class="tech-tag">Angular</span><span class="tech-tag">MySQL</span><span class="tech-tag">Docker</span>
@@ -357,10 +406,10 @@
                 <div>
                     <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
                         <h3 class="text-2xl font-bold text-white">Breast Cancer Detection using CNN</h3>
-                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Completed: Sep 2024</span>
+                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Dec 2024</span>
                     </div>
                     <p class="text-orange-400 font-semibold mb-4">
-                        Objective: To develop a deep learning model to improve the accuracy of breast cancer diagnosis from medical imaging data.
+                        Objective: Develop a deep learning model to improve the accuracy of breast cancer diagnosis from medical imaging data.
                     </p>
                     <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
                         <li>Trained a CNN on over 5,000 images, enhancing diagnostic accuracy by <span class="highlight">35-40%</span> compared to baseline models.</li>
@@ -383,10 +432,10 @@
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-4xl font-bold font-display gradient-title mb-6">Get In Touch</h2>
       <p class="text-gray-400 mb-10 text-lg">
-        I am pursuing opportunities as a <span class="highlight">Software Developer</span> or <span class="highlight">AI/ML Engineer</span>, with availability for <span class="highlight">internships from January 2026</span> and <span class="highlight">full-time roles from May 2026</span>. I'm ready to apply my skills to real-world challenges and welcome a conversation about how I can bring value to your team.
+        I am currently working as an <span class="highlight">AI/ML Intern</span> and am open to discussing how I can bring value to your team. I am available for <span class="highlight">Full-time opportunities</span> starting May 2026.
       </p>
       <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
-        <a href="mailto:abhi1321choudhary@gmail.com" class="header-link text-lg"><i data-lucide="mail" class="inline-block mr-2 w-5 h-5"></i>Email</a>
+        <a href="mailto:abhi1312choudhary@gmail.com" class="header-link text-lg"><i data-lucide="mail" class="inline-block mr-2 w-5 h-5"></i>Email</a>
         <a href="https://github.com/abh1shekChoudhary" target="_blank" class="header-link text-lg"><i data-lucide="github" class="inline-block mr-2 w-5 h-5"></i>GitHub</a>
         <a href="https://linkedin.com/in/abhishek-choudhary-991634251/" target="_blank" class="header-link text-lg"><i data-lucide="linkedin" class="inline-block mr-2 w-5 h-5"></i>LinkedIn</a>
       </div>
@@ -394,7 +443,7 @@
   </section>
 
   <footer class="py-8 px-6 text-center text-gray-500 text-sm border-t border-gray-700/50">
-    &copy; 2025 Abhishek Choudhary. All rights reserved.
+    &copy; 2026 Abhishek Choudhary. All rights reserved.
   </footer>
 
   <script>
