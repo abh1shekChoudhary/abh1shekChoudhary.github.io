@@ -3,54 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abhishek Choudhary | Portfolio</title>
-  <meta name="description" content="Abhishek Choudhary — Computer Science Engineer | AI/ML & Full-Stack Development" />
+  <title>Abhishek Choudhary | SDE & AI Engineer</title>
+  <meta name="description" content="Abhishek Choudhary — Architecting robust backend systems and engineering autonomous AI workflows." />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
-  <script data-goatcounter="https://abhishekportfolio.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+  <script data-goatcounter="https://abhishekportfolio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
   <style>
     body {
-      background-color: #111827; /* Dark Blue-Gray */
-      color: #E5E7EB; /* Light Gray */
+      background-color: #0a0f1a;
+      color: #E5E7EB; 
       font-family: 'Inter', sans-serif;
     }
-    .font-display {
-      font-family: 'Space Grotesk', sans-serif;
+    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono { font-family: 'Fira Code', monospace; }
+    .section { scroll-margin-top: 80px; }
+    
+    .mech-cut {
+      clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
     }
-    .section {
-      scroll-margin-top: 80px;
-    }
-    .card {
-      background: rgba(31, 41, 55, 0.5); /* Semi-transparent dark card */
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.3);
-    }
+    
     .gradient-title {
-      background: linear-gradient(to right, #F97316, #EA580C); /* Orange Gradient */
+      background: linear-gradient(to right, #F97316, #EA580C);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .highlight {
-      color: #FB923C; 
-      font-weight: 600;
-    }
+    
     .btn {
-      border-radius: 0.5rem;
       padding: 0.75rem 1.5rem;
       font-weight: 600;
       transition: all 0.2s ease;
@@ -58,406 +44,545 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      cursor: pointer;
     }
-    .btn-primary {
-      background: #F97316; 
-      color: #111827;
-      border: 1px solid #F97316;
-    }
-    .btn-primary:hover {
-      background: #FB923C;
-      transform: scale(1.05);
-    }
-    .btn-outline {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #E5E7EB;
-    }
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.4);
-      transform: scale(1.02);
-      color: #fff;
-    }
-    .btn-live {
-      border-color: #F97316;
-      color: #F97316;
-      box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
-    }
-    .btn-live:hover {
-      background: rgba(249, 115, 22, 0.1);
-      box-shadow: 0 0 16px rgba(249, 115, 22, 0.6);
-      transform: scale(1.05);
-    }
-    .header-link {
-      color: #9CA3AF; /* Medium Gray */
-      transition: color 0.2s ease;
+    .btn-primary { background: #F97316; color: #111827; border: 1px solid #F97316; }
+    .btn-primary:hover { background: #FB923C; transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(249, 115, 22, 0.5); }
+    .btn-outline { border: 1px solid rgba(255, 255, 255, 0.2); color: #E5E7EB; background: rgba(255, 255, 255, 0.05); }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.4); transform: translateY(-2px); color: #fff; }
+    
+    .header-link { color: #9CA3AF; transition: color 0.2s ease; position: relative; padding-bottom: 4px; }
+    .header-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #F97316; transition: width 0.3s ease; }
+    .header-link:hover { color: #F3F4F6; }
+    .header-link:hover::after { width: 100%; }
+
+    .terminal-cursor { display: inline-block; width: 8px; height: 1.2em; background-color: #F97316; vertical-align: middle; animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Bento Box & Project Cards */
+    .bento-card, .project-card {
+      background-color: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       position: relative;
-      padding-bottom: 4px;
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
-    .header-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: #F97316;
-        transition: width 0.3s ease;
-    }
-    .header-link:hover {
-      color: #F3F4F6;
-    }
-    .header-link:hover::after {
-        width: 100%;
-    }
-    .tech-tag {
-        background-color: rgba(249, 115, 22, 0.1);
-        color: #FB923C;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.8rem;
-        font-weight: 500;
-    }
-    .status-tag {
-        background-color: rgba(52, 211, 153, 0.1);
-        color: #34D399;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .status-tag::before {
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #34D399;
-        animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-    }
-    .completed-tag {
-        color: #A5B4FC;
-        background-color: rgba(129, 140, 248, 0.1);
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .timeline-date {
-        font-family: 'Space Grotesk', sans-serif;
-        color: #9CA3AF;
-        font-size: 0.9rem;
-    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7); border-color: rgba(249, 115, 22, 0.3); }
+    .bento-glow { position: absolute; top: 0; right: 0; width: 200px; height: 200px; border-radius: 50%; transform: translate(30%, -30%); pointer-events: none; opacity: 0.15; transition: opacity 0.3s ease; }
+    
+    .card-backdrop { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; opacity: 0.12; transition: opacity 0.4s ease; mix-blend-mode: luminosity; }
+    .project-card:hover .card-backdrop { opacity: 0.25; }
+    
+    .card-content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; }
+
+    .base-tag { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); color: #D1D5DB; }
+
+    .tag-orange { color: #FB923C; border-color: rgba(249, 115, 22, 0.3); }
+    .tag-blue { color: #60A5FA; border-color: rgba(59, 130, 246, 0.3); }
+
+    .toggle-active-sde { background: #F97316 !important; color: #111827 !important; border-color: #F97316 !important; }
+    .toggle-active-ai { background: #3B82F6 !important; color: #111827 !important; border-color: #3B82F6 !important; }
+    
+    /* Fade transition for project grids */
+    .fade-enter { opacity: 0; transform: translateY(10px); }
+    .fade-enter-active { opacity: 1; transform: translateY(0); transition: opacity 0.4s ease, transform 0.4s ease; }
   </style>
 </head>
 <body class="min-h-screen relative">
 
-  <header class="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-700/50">
-    <div class="max-w-7xl mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <a href="#home" class="text-2xl font-bold font-display gradient-title">Abhishek Choudhary</a>
-        <nav class="hidden md:flex space-x-6 lg:space-x-8">
-          <a href="#about" class="header-link">About</a>
-          <a href="#education" class="header-link">Education</a>
-          <a href="#skills" class="header-link">Skills</a>
-          <a href="#experience" class="header-link">Experience</a>
-          <a href="#projects" class="header-link">Projects</a>
-          <a href="#contact" class="header-link">Contact</a>
-        </nav>
-      </div>
+  <header class="fixed top-0 w-full z-50 bg-[#0a0f1a]/90 backdrop-blur-lg border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="text-xl font-bold font-mono text-gray-300 hover:text-white transition-colors">
+        <span class="text-orange-500">~/</span>abhishek
+      </a>
+      <nav class="hidden md:flex space-x-6 lg:space-x-8 text-sm font-medium">
+        <a href="#skills" class="header-link">Architecture</a>
+        <a href="#experience" class="header-link">Experience</a>
+        <a href="#flagship" class="header-link">Flagships</a>
+        <a href="#projects" class="header-link">Deployments</a>
+      </nav>
     </div>
   </header>
 
-  <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
-    <div class="absolute inset-0 -z-10 h-full w-full bg-gray-900 bg-[radial-gradient(#F97316_1px,transparent_1px)] [background-size:32px_32px]"></div>
-    <div class="text-center max-w-4xl mx-auto section">
-      <h1 class="text-5xl md:text-7xl font-bold font-display mb-4">
-        <span class="gradient-title">Abhishek Choudhary</span>
-      </h1>
-      <p class="text-2xl text-gray-300 mb-6 font-display">Computer Science Engineer</p>
-      <p class="text-lg text-gray-400 mb-10 max-w-3xl mx-auto">
-        Specializing in <span class="highlight">Artificial Intelligence</span> & <span class="highlight">Full-Stack Development</span>. I build intelligent, scalable applications that turn complex data into real-world impact.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#projects" class="btn btn-primary">
-          <i data-lucide="folder-git-2"></i>
-          <span>View My Work</span>
-        </a>
-        <a href="https://raw.githubusercontent.com/abh1shekChoudhary/Resume/main/Abhishek_Choudhary_SDE_AIML.pdf" target="_blank" class="btn btn-outline">
-          📄 Resume
-        </a>
+  <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-12 overflow-hidden">
+    <div class="absolute inset-0 -z-10 h-full w-full bg-[radial-gradient(#F97316_1px,transparent_1px)] [background-size:40px_40px] opacity-10"></div>
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center section">
+      <div class="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <div class="inline-block mb-4 px-3 py-1 border border-orange-500/30 bg-orange-500/10 text-orange-400 font-mono text-xs tracking-wider mech-cut">
+          SYSTEM.STATUS == "READY"
+        </div>
+        <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold font-display mb-6 leading-tight text-white">
+          Architecting <span class="gradient-title">Systems.</span><br />
+          Engineering <span class="text-blue-500">AI.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
+          I bridge the gap between intelligent reasoning and scalable infrastructure. Building enterprise Java backends and autonomous Python orchestration workflows.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <a href="#flagship" class="btn btn-primary mech-cut text-lg px-8 py-4">
+            <i data-lucide="award" class="mr-2"></i> Flagship Work
+          </a>
+          <a href="https://raw.githubusercontent.com/abh1shekChoudhary/Resume/main/Abhishek_Choudhary_SDE_AIML.pdf" target="_blank" class="btn btn-outline mech-cut text-lg px-8 py-4">
+            <i data-lucide="file-terminal" class="mr-2"></i> Init_Resume
+          </a>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2 w-full max-w-lg mx-auto lg:max-w-none shadow-2xl shadow-orange-900/10">
+        <div class="bg-gray-900 border border-gray-700 mech-cut overflow-hidden flex flex-col h-80 relative">
+          <div class="bg-gray-800 px-4 py-3 flex items-center border-b border-gray-700">
+            <div class="flex space-x-2">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div class="mx-auto text-xs font-mono text-gray-500">abhic@engineering-env:~</div>
+          </div>
+          <div class="p-6 font-mono text-sm text-gray-300 flex-1 overflow-hidden relative bg-[#0d1117]">
+            <div id="terminal-content" class="whitespace-pre-wrap leading-relaxed"></div><span class="terminal-cursor"></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="about" class="py-24 px-6 section">
-    <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl font-bold font-display gradient-title mb-6">About Me</h2>
-        <div class="card p-8 md:p-12">
-            <div class="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto space-y-4">
-                <p>
-                    As a final-year Computer Science student at <span class="highlight">VIT Bhopal</span> with a CGPA of <span class="highlight">8.74</span>, I specialize in Artificial Intelligence and Machine Learning. I am passionate about building intelligent, scalable applications, a skill I've honed by solving over <span class="highlight">500</span> programming and problem-solving questions on various platforms and deploying multiple full-stack projects <span class="highlight">to production</span>.
-                </p>
-                <p>
-                    I thrive on transforming complex data into real-world solutions and am actively seeking opportunities where I can contribute to challenging projects in AI/ML and software engineering.
-                </p>
-            </div>
+  <section id="skills" class="py-24 px-6 section relative bg-gray-900/30 border-y border-gray-800/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col items-center mb-16">
+        <div class="inline-block mb-3 px-3 py-1 border border-orange-500/30 bg-orange-500/10 text-orange-400 font-mono text-xs tracking-wider mech-cut">
+          ARCHITECTURE_STACK
         </div>
-    </div>
-</section>
+        <h2 class="text-4xl md:text-5xl font-bold font-display text-white text-center">
+          Engineering <span class="gradient-title">Capabilities</span>
+        </h2>
+      </div>
 
-<section id="education" class="py-24 px-6 section bg-gray-900/50">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr">
+        <div class="bento-card mech-cut md:col-span-2 flex flex-col justify-between group p-8">
+          <div class="bento-glow bg-orange-500/20"></div>
+          <div class="card-content">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 group-hover:border-orange-500/50 transition-colors">
+                <i data-lucide="server" class="w-6 h-6 text-orange-400"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white font-display">Enterprise Backend & Full-Stack</h3>
+            </div>
+            <p class="text-gray-400 leading-relaxed mb-6 max-w-lg">
+              Architecting scalable RESTful APIs and real-time communication systems. Proficient in layered architectures, distributed state management, and modern frontend integration.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="base-tag tag-orange">Java</span><span class="base-tag tag-orange">C++</span><span class="base-tag tag-orange">Spring Boot</span><span class="base-tag tag-orange">Angular</span><span class="base-tag tag-orange">Thymeleaf</span><span class="base-tag tag-orange">WebSockets</span><span class="base-tag tag-orange">SQL</span><span class="base-tag tag-orange">MySQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card mech-cut md:col-span-1 md:row-span-2 flex flex-col group p-8">
+          <div class="bento-glow bg-blue-500/20"></div>
+          <div class="card-content">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 group-hover:border-blue-500/50 transition-colors">
+                <i data-lucide="brain-circuit" class="w-6 h-6 text-blue-400"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-white font-display">Agentic AI & ML</h3>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Engineering self-governing LLM workflows, automated diagnostic agents, and predictive data pipelines. Moving beyond brittle scripts to resilient orchestration.
+            </p>
+            <div class="flex flex-col gap-3 mt-auto">
+              <span class="base-tag tag-blue text-center w-full">Python</span>
+              <span class="base-tag tag-blue text-center w-full">LangChain</span>
+              <span class="base-tag tag-blue text-center w-full">OpenAI / Gemini API</span>
+              <span class="base-tag tag-blue text-center w-full">TensorFlow</span>
+              <span class="base-tag tag-blue text-center w-full">Keras</span>
+              <span class="base-tag tag-blue text-center w-full">Scikit-learn</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card mech-cut md:col-span-1 flex flex-col justify-between group p-6">
+          <div class="bento-glow bg-gray-500/20"></div>
+          <div class="card-content">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700"><i data-lucide="cloud-cog" class="w-5 h-5 text-gray-400"></i></div>
+              <h3 class="text-lg font-bold text-white font-display">Cloud & DevOps</h3>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">Containerizing applications and managing robust cloud deployment pipelines.</p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="base-tag">AWS</span><span class="base-tag">Docker</span><span class="base-tag">Render</span><span class="base-tag">Vercel</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card mech-cut md:col-span-1 flex flex-col justify-between group p-6">
+          <div class="bento-glow bg-gray-500/20"></div>
+          <div class="card-content">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700"><i data-lucide="terminal-square" class="w-5 h-5 text-gray-400"></i></div>
+              <h3 class="text-lg font-bold text-white font-display">Core Tooling</h3>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">500+ algorithmic problems solved. Disciplined in version control and API testing.</p>
+            <div class="flex flex-wrap gap-2 mt-auto">
+              <span class="base-tag">Git / GitHub</span><span class="base-tag">Postman</span><span class="base-tag">IntelliJ IDEA</span><span class="base-tag">VS Code</span><span class="base-tag">Colab</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-24 px-6 section">
     <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-bold font-display gradient-title mb-12 text-center">Education</h2>
-        <div class="card p-8">
-            <div class="flex flex-col sm:flex-row justify-between items-start">
-                <div>
-                    <h3 class="text-xl font-bold text-white">Vellore Institute of Technology, Bhopal</h3>
-                    <p class="text-orange-400 font-semibold">B.Tech in Computer Science & Engineering</p>
-                    <p class="text-gray-400 text-sm mt-1">Specialization in Artificial Intelligence & Machine Learning</p>
-                </div>
-                <div class="text-left sm:text-right mt-4 sm:mt-0">
-                    <p class="text-gray-300 font-semibold">Expected May 2026</p>
-                    <p class="text-gray-400">CGPA: <span class="highlight">8.74 / 10.0</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-  <section id="skills" class="py-24 px-6 section">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold font-display gradient-title mb-12 text-center">Technical Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card p-6">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="bg-orange-500/10 p-3 rounded-lg"><i data-lucide="code-2" class="w-6 h-6 text-orange-400"></i></div>
-                        <h3 class="text-xl font-semibold text-white">Languages</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4">Proficient in Python for data science, Java for scalable backends.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tech-tag">Java</span><span class="tech-tag">Python</span><span class="tech-tag">C++</span><span class="tech-tag">SQL</span>
-                    </div>
-                </div>
-                <div class="card p-6">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="bg-orange-500/10 p-3 rounded-lg"><i data-lucide="terminal-square" class="w-6 h-6 text-orange-400"></i></div>
-                        <h3 class="text-xl font-semibold text-white">Developer Tools</h3>
-                    </div>
-                     <p class="text-gray-400 text-sm mb-4">Experienced in containerizing apps with Docker and leveraging tools like Git and Postman for efficient workflows.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tech-tag">Docker</span><span class="tech-tag">VS Code</span><span class="tech-tag">IntelliJ IDEA</span><span class="tech-tag">Postman</span><span class="tech-tag">Git</span>
-                    </div>
-                </div>
-                <div class="card p-6">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="bg-orange-500/10 p-3 rounded-lg"><i data-lucide="cuboid" class="w-6 h-6 text-orange-400"></i></div>
-                        <h3 class="text-xl font-semibold text-white">Technologies & Frameworks</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-4">Skilled in building full-stack applications using Spring Boot (backend) and Angular (frontend).</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tech-tag">Spring Boot</span><span class="tech-tag">Angular</span><span class="tech-tag">WebSockets</span><span class="tech-tag">Thymeleaf</span><span class="tech-tag">Vercel</span><span class="tech-tag">Render</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<section id="experience" class="py-24 px-6 section bg-gray-900/50">
-    <div class="max-w-5xl mx-auto">
-        <h2 class="text-4xl font-bold font-display gradient-title mb-12 text-center">Work Experience</h2>
-        
-        <div class="card p-8 md:p-10 relative overflow-hidden">
-             <div class="absolute top-0 right-0 p-8 opacity-5 transform translate-x-4 -translate-y-4">
+        <h2 class="text-4xl font-bold font-display gradient-title mb-12 text-center">Industry Experience</h2>
+        <div class="project-card mech-cut p-8 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-8 opacity-5 transform translate-x-4 -translate-y-4 group-hover:scale-110 transition-transform duration-500">
                 <i data-lucide="briefcase" class="w-32 h-32 text-orange-500"></i>
             </div>
-
-            <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-2">
+            <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-2 relative z-10">
                 <div>
                     <h3 class="text-2xl font-bold text-white">AI/ML Intern</h3>
-                    <a href="https://www.cynapseai.com/" target="_blank" class="text-xl text-orange-400 font-semibold mt-1 hover:text-orange-300 transition-colors inline-flex items-center gap-2">
-                        Cynapse AI
-                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    <a href="https://www.cynapseai.com/" target="_blank" class="text-lg text-orange-400 font-semibold mt-1 hover:text-orange-300 transition-colors inline-flex items-center gap-2">
+                        Cynapse AI <i data-lucide="external-link" class="w-4 h-4"></i>
                     </a>
                 </div>
-                <div class="status-tag mt-1 md:mt-2">
-                    Oct 2025 - Present
-                </div>
+                <div class="font-mono text-sm text-gray-400 border border-gray-700 bg-gray-800 px-3 py-1 mech-cut">Oct 2025 - Present</div>
             </div>
-
-            <div class="space-y-4 text-gray-300 text-lg leading-relaxed mb-8">
-                <p>
-                    Collaborating in an Agile team to define product roadmaps and build scalable AI solutions.
-                </p>
-                <ul class="list-disc list-inside space-y-3 text-gray-400">
-                    <li>
-                        Defined a 3-quarter product roadmap for a <span class="highlight">Gen AI agent</span>, projected to boost user productivity by 20-30% by automating workflows across 15+ enterprise applications.
-                    </li>
-                    <li>
-                        Contributed to scalable data pipelines processing <span class="highlight">100,000+ daily events</span> from 10+ APIs, fueling a real-time analytics dashboard.
-                    </li>
-                    <li>
-                        Optimized ETL pipelines to reduce data latency by <span class="highlight">40%</span>, ensuring faster insights for end-users.
-                    </li>
+            <div class="space-y-4 text-gray-300 leading-relaxed mb-8 relative z-10">
+                <p class="font-medium text-gray-200">Collaborating in an Agile environment to architect scalable data solutions and intelligent agents.</p>
+                <ul class="list-none space-y-3 text-gray-400">
+                    <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-orange-500 mr-2 shrink-0 mt-0.5"></i> <span>Defined a roadmap for a <strong class="text-white">Gen AI agent</strong>, projected to automate workflows across 15+ enterprise applications.</span></li>
+                    <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-orange-500 mr-2 shrink-0 mt-0.5"></i> <span>Engineered scalable data pipelines processing <strong class="text-white">100,000+ daily events</strong> from multiple API endpoints.</span></li>
+                    <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-orange-500 mr-2 shrink-0 mt-0.5"></i> <span>Optimized ETL pipelines to reduce data latency by <strong class="text-white">40%</strong>.</span></li>
                 </ul>
             </div>
-
-            <div class="flex flex-wrap gap-3">
-                <span class="tech-tag">Generative AI</span>
-                <span class="tech-tag">ETL Pipelines</span>
-                <span class="tech-tag">Data Analytics</span>
-                <span class="tech-tag">Agile</span>
+            <div class="flex flex-wrap gap-2 relative z-10">
+                <span class="base-tag tag-blue">Generative AI</span><span class="base-tag tag-blue">ETL Pipelines</span><span class="base-tag tag-blue">Data Analytics</span>
             </div>
         </div>
     </div>
-</section>
+  </section>
 
-  <section id="projects" class="py-24 px-6 section">
+  <section id="flagship" class="py-24 px-6 section">
     <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold font-display gradient-title mb-6 text-center">Featured Projects</h2>
-        <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-12 text-center">
-            My focus is on creating production-ready applications. You'll find live, publicly accessible links for all relevant projects below.
-        </p>
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold font-display gradient-title mb-6">Flagship Architecture</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                My two most complex builds, representing the absolute peak of my capabilities in Autonomous AI and Enterprise Software.
+            </p>
+        </div>
 
-            <div class="card p-8 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
-                        <h3 class="text-2xl font-bold text-white">Autonomous HR Agent</h3>
-                       <span class="status-tag">
-  <i data-lucide="hammer" class="w-4 h-4 mr-2"></i> 
-  Currently Building
-</span>
+        <div class="flex flex-col gap-12">
+            
+            <div class="project-card mech-cut p-8 md:p-12">
+                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1600&q=80')]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/40 z-0"></div>
+                
+                <div class="card-content grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
+                    <div class="lg:col-span-3">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="brain-circuit" class="text-blue-500 w-6 h-6"></i>
+                            <span class="font-mono text-sm tracking-widest text-blue-400">FLAGSHIP_AI</span>
+                            <span class="ml-4 font-mono text-xs tracking-widest text-yellow-400 border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 mech-cut flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-yellow-400 mr-2 animate-pulse"></span> IN_DEV
+                            </span>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Phoenix: Resilient Automation</h3>
+                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                            A high-performance Python framework designed to bridge the gap between brittle script execution and intelligent task orchestration. Utilizes LLMs for semantic error diagnosis to create self-healing automation workflows.
+                        </p>
+                        <ul class="space-y-3 text-gray-400 text-sm mb-8">
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 shrink-0"></i> Developing a high-concurrency task orchestration system utilizing Asyncio.</li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 shrink-0"></i> Designing custom "Rebirth" logic enabling processes to dynamically re-architect paths after failure contexts are generated.</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="base-tag tag-blue">Python (Asyncio)</span><span class="base-tag tag-blue">LangChain</span><span class="base-tag tag-blue">Pydantic</span><span class="base-tag tag-blue">OpenAI API</span><span class="base-tag tag-blue">SQLite</span>
+                        </div>
+                        <a href="https://github.com/abh1shekChoudhary/Phoenix" target="_blank" class="btn btn-outline border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white mech-cut text-sm">
+                            <i data-lucide="github"></i> View Framework Core
+                        </a>
                     </div>
-                    <p class="text-orange-400 font-semibold mb-4">
-                        Objective: To engineer an intelligent, self-governing system that automates the entire leave management lifecycle.
-                    </p>
-                    <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
-                        <li>Architected an <span class="highlight">Agentic Workflow</span> using <span class="highlight">OpenAI Function Calling</span> to autonomously interpret unstructured emails and execute precise database actions.</li>
-                        <li>Designed a conflict-resolution engine that safeguards <span class="highlight">operational continuity</span> by strictly enforcing <span class="highlight">Team Capacity</span> and <span class="highlight">Overlap Policies (70%)</span>.</li>
-                        <li>Deployed a full-cycle <span class="highlight">Gmail API</span> integration to fetch real-time requests, update the roster, and draft context-aware responses.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">OpenAI API</span>
-                        <span class="tech-tag">Gmail API</span>
-                        <span class="tech-tag">Agentic Workflow</span>
+                    
+                    <div class="lg:col-span-2 hidden lg:block bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 p-6 mech-cut shadow-xl">
+                        <h4 class="text-gray-200 font-mono text-sm mb-4 border-b border-gray-700 pb-2">Execution Pipeline:</h4>
+                        <div class="space-y-4 font-mono text-xs text-gray-400">
+                            <div class="flex items-center"><i data-lucide="play-circle" class="w-4 h-4 text-blue-400 mr-3"></i> 1. Async Task Initiation</div>
+                            <div class="flex items-center"><i data-lucide="alert-triangle" class="w-4 h-4 text-red-400 mr-3"></i> 2. Exception Intercepted</div>
+                            <div class="flex items-center"><i data-lucide="cpu" class="w-4 h-4 text-purple-400 mr-3"></i> 3. LLM Semantic Diagnosis</div>
+                            <div class="flex items-center"><i data-lucide="refresh-cw" class="w-4 h-4 text-green-400 mr-3"></i> 4. State Recovery & Rebirth</div>
+                        </div>
                     </div>
-                </div>
-                <div class="flex gap-4 mt-auto">
-                    <a href="https://github.com/abh1shekChoudhary/Gmail_Agent" target="_blank" class="btn btn-outline text-sm py-2 px-4"><i data-lucide="github"></i> Code</a>
                 </div>
             </div>
 
-            <div class="card p-8 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
-                        <h3 class="text-2xl font-bold text-white">Online Multiplayer Mancala Game</h3>
-                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Sept 2025</span>
+            <div class="project-card mech-cut p-8 md:p-12">
+                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80')]"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/40 z-0"></div>
+                
+                <div class="card-content grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
+                    <div class="lg:col-span-3">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="server" class="text-orange-500 w-6 h-6"></i>
+                            <span class="font-mono text-sm tracking-widest text-orange-400">FLAGSHIP_SDE</span>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Smart Resume Screener</h3>
+                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                            Architected a full-stack Spring Boot enterprise recruitment platform designed to automate high-volume hiring pipelines. Moved beyond rigid ATS keyword constraints by integrating the Google Gemini API for semantic document analysis.
+                        </p>
+                        <ul class="space-y-3 text-gray-400 text-sm mb-8">
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-orange-500 mr-2 shrink-0"></i> Developed a multi-format document parsing engine utilizing Apache PDFBox for extraction.</li>
+                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-orange-500 mr-2 shrink-0"></i> Engineered RESTful APIs and optimized a MySQL schema utilizing Spring Data JPA for complex CRUD operations.</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="base-tag tag-orange">Java 17</span><span class="base-tag tag-orange">Spring Boot</span><span class="base-tag tag-orange">Gemini API</span><span class="base-tag tag-orange">Apache PDFBox</span><span class="base-tag tag-orange">MySQL</span>
+                        </div>
+                        <a href="https://github.com/abh1shekChoudhary/Smart-Resume-Screener" target="_blank" class="btn btn-primary mech-cut text-sm">
+                            <i data-lucide="github"></i> Inspect Architecture
+                        </a>
                     </div>
-                    <p class="text-orange-400 font-semibold mb-4">
-                        Objective: A full-stack, real-time web application featuring online multiplayer and a challenging AI opponent.
-                    </p>
-                    <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
-                        <li>Engineered a robust Java Spring Boot backend using WebSockets for seamless, real-time, two-player gameplay.</li>
-                        <li>Implemented a <span class="highlight">Minimax AI opponent</span> with alpha-beta pruning, providing multiple difficulty levels.</li>
-                        <li>Built a dynamic front-end with vanilla JavaScript that renders the game state entirely from server-sent events.</li>
-                        <li>Deployed on <span class="highlight">AWS EC2</span> with Docker and Caddy reverse proxy for automated <span class="highlight">SSL/TLS (HTTPS)</span>.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-tag">Java</span>
-                        <span class="tech-tag">Spring Boot</span>
-                        <span class="tech-tag">WebSockets</span>
-                        <span class="tech-tag">AWS EC2</span>
-                        <span class="tech-tag">Docker</span>
+                    
+                    <div class="lg:col-span-2 hidden lg:block bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 p-6 mech-cut shadow-xl">
+                        <h4 class="text-gray-200 font-mono text-sm mb-4 border-b border-gray-700 pb-2">Architecture Flow:</h4>
+                        <div class="space-y-4 font-mono text-xs text-gray-400">
+                            <div class="flex items-center"><i data-lucide="file-text" class="w-4 h-4 text-orange-400 mr-3"></i> PDFBox Parsing (Doc/Txt)</div>
+                            <div class="flex items-center"><i data-lucide="database" class="w-4 h-4 text-blue-400 mr-3"></i> Spring Data JPA Storage</div>
+                            <div class="flex items-center"><i data-lucide="zap" class="w-4 h-4 text-purple-400 mr-3"></i> Gemini LLM Scoring Logic</div>
+                            <div class="flex items-center"><i data-lucide="layout" class="w-4 h-4 text-green-400 mr-3"></i> Thymeleaf Dashboard Render</div>
+                        </div>
                     </div>
-                </div>
-                           <div class="flex gap-4 mt-auto">
-                <a href="https://github.com/abh1shekChoudhary/MancalaGame" target="_blank" class="btn btn-outline text-sm py-2 px-4"><i data-lucide="github"></i> Code</a>
-                <a href="https://mancala-game.me/" target="_blank" class="btn btn-live text-sm py-2 px-4"><i data-lucide="monitor"></i> Live Demo</a>
-            </div>
-            </div>
-
-            <div class="card p-8 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
-                        <h3 class="text-2xl font-bold text-white">AI-ML Food Preparation Prediction</h3>
-                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> June 2025</span>
-                    </div>
-                    <p class="text-orange-400 font-semibold mb-4">
-                        Objective: Reduce food waste and improve kitchen efficiency by accurately forecasting meal demand using Deep Learning.
-                    </p>
-                    <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
-                        <li>Engineered a model achieving R² scores of 0.85–0.94, projecting an <span class="highlight">18-25% reduction in food waste</span>.</li>
-                        <li>Architected a data pipeline to generate <span class="highlight">9,000+</span> synthetic datasets to model complex consumption patterns.</li>
-                        <li>Optimized neural networks with early stopping and hyperparameter tuning to ensure high accuracy.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-tag">TensorFlow</span><span class="tech-tag">Keras</span><span class="tech-tag">Python</span><span class="tech-tag">Scikit-learn</span>
-                    </div>
-                </div>
-                <div class="flex gap-4 mt-auto">
-                    <a href="https://colab.research.google.com/drive/1YYbQMDB1b7_wNEX4wKxrLNr41MS5Mqb4?usp=sharing" target="_blank" class="btn btn-outline text-sm py-2 px-4"><i data-lucide="book-open"></i> Colab</a>
-                </div>
-            </div>
-
-            <div class="card p-8 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-start justify-between mb-2 flex-wrap gap-2">
-                        <h3 class="text-2xl font-bold text-white">Mess Management System</h3>
-                        <span class="completed-tag"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Mar 2025</span>
-                    </div>
-                    <p class="text-orange-400 font-semibold mb-4">
-                        Objective: Design and deploy a full-stack web application to automate billing and record-keeping for 6,000+ students.
-                    </p>
-                    <ul class="space-y-2 text-gray-400 list-disc list-inside mb-6">
-                        <li>Built a scalable backend with Spring Boot, featuring 10+ RESTful APIs that improved administrative efficiency by <span class="highlight">16–24%</span>.</li>
-                        <li>Developed a responsive and intuitive user interface with Angular for both students and staff.</li>
-                       <li>Containerized with Docker and deployed on Render (Backend) and Vercel (Frontend), featuring a <span class="highlight">guest login</span> for easy demos.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="tech-tag">Spring Boot</span><span class="tech-tag">Angular</span><span class="tech-tag">MySQL</span><span class="tech-tag">Docker</span>
-                    </div>
-                </div>
-                <div class="flex gap-4 mt-auto">
-                    <a href="https://github.com/abh1shekChoudhary/MessApplication" target="_blank" class="btn btn-outline text-sm py-2 px-4"><i data-lucide="github"></i> Code</a>
-                    <a href="https://mess-application-front-end-angular.vercel.app/login" target="_blank" class="btn btn-live text-sm py-2 px-4"><i data-lucide="monitor"></i> Live Demo</a>
                 </div>
             </div>
 
         </div>
     </div>
-</section>
+  </section>
+
+  <section id="projects" class="py-24 px-6 section bg-gray-900/30 border-y border-gray-800/50">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold font-display text-white mb-6">Additional Deployments</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-8">
+                Filter by domain to explore the rest of my production-ready applications, ranging from distributed game engines to multi-agent LLM logic pipelines.
+            </p>
+            
+            <div class="inline-flex bg-gray-800 p-1 rounded-none mech-cut border border-gray-700">
+                <button id="toggle-sde" onclick="showDomain('sde')" class="btn btn-outline border-none mech-cut toggle-active-sde px-6 py-2 transition-all">
+                    <i data-lucide="server" class="w-4 h-4 mr-2"></i> Core Software Eng.
+                </button>
+                <button id="toggle-ai" onclick="showDomain('ai')" class="btn btn-outline border-none mech-cut px-6 py-2 transition-all">
+                    <i data-lucide="brain-circuit" class="w-4 h-4 mr-2"></i> Applied AI & ML
+                </button>
+            </div>
+        </div>
+
+        <div id="sde-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-enter-active">
+            
+            <div class="project-card mech-cut p-8 flex flex-col justify-between">
+                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=800&q=80')]"></div>
+                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold text-white mb-2">Real-Time Networked Mancala</h3>
+                    <p class="text-orange-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Distributed Game Engine & Stateful WebSockets</p>
+                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Architected a custom Java game engine to govern complex state transitions, turn-based validation, and strict win-condition logic.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Engineered low-latency bidirectional multiplayer synchronization utilizing Spring WebSocket, STOMP, and SockJS protocols.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Integrated a custom heuristic-based AI opponent utilizing Minimax with alpha-beta pruning for dynamic single-player difficulty scaling.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                        <span class="base-tag">Java</span><span class="base-tag">Spring Boot</span><span class="base-tag">Spring WebSocket</span><span class="base-tag">STOMP</span><span class="base-tag">SockJS</span>
+                    </div>
+                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
+                        <a href="https://github.com/abh1shekChoudhary/MancalaGame" target="_blank" class="text-sm font-mono text-gray-400 hover:text-orange-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>Inspect Engine Code</a>
+                        <a href="https://mancala-game.me/" target="_blank" class="text-sm font-mono text-orange-400 hover:text-white transition-colors"><i data-lucide="external-link" class="w-4 h-4 inline mr-2"></i>Launch Server Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card mech-cut p-8 flex flex-col justify-between">
+                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80')]"></div>
+                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold text-white mb-2">Enterprise Mess Management</h3>
+                    <p class="text-orange-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Full-Stack Microservices & Reactive UI</p>
+                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Developed a scalable Spring Boot REST API backed by Spring Data JPA to automate institutional billing and high-concurrency attendance tracking.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Built a highly responsive frontend utilizing Angular 17's modern Standalone Components, Signals, and RxJS for reactive state management.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Containerized the backend architecture with Docker to eliminate environment disparities and deployed the client securely via Vercel.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                        <span class="base-tag">Spring Boot</span><span class="base-tag">Angular 17</span><span class="base-tag">Spring Data JPA</span><span class="base-tag">RxJS</span><span class="base-tag">Docker</span><span class="base-tag">Vercel</span>
+                    </div>
+                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
+                        <a href="https://github.com/abh1shekChoudhary/MessApplication" target="_blank" class="text-sm font-mono text-gray-400 hover:text-orange-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>Backend Core API</a>
+                        <a href="https://mess-application-front-end-angular.vercel.app/login" target="_blank" class="text-sm font-mono text-orange-400 hover:text-white transition-colors"><i data-lucide="external-link" class="w-4 h-4 inline mr-2"></i>Client Interface Demo</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="ai-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 hidden">
+
+            <div class="project-card mech-cut p-8 flex flex-col justify-between">
+                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80')]"></div>
+                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold text-white mb-2">Autonomous Sales Agent</h3>
+                    <p class="text-blue-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Multi-Agent Orchestration & RAG</p>
+                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Engineered a multi-agent orchestration layer using CrewAI to automate end-to-end B2B sales research and personalized outreach.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Integrated real-time web search capabilities via SerpApi to dynamically ground AI pitches in current prospect news and financial data.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Designed a highly accurate RAG pipeline utilizing Pinecone and Gemini LLM to enforce strict company brand communication guidelines.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                        <span class="base-tag">CrewAI</span><span class="base-tag">Pinecone</span><span class="base-tag">Gemini LLM</span><span class="base-tag">SerpApi</span>
+                    </div>
+                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
+                        <a href="https://github.com/abh1shekChoudhary/sales_agentic_ai" target="_blank" class="text-sm font-mono text-gray-400 hover:text-blue-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>View Agent Logic</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card mech-cut p-8 flex flex-col justify-between">
+                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1596526131083-e8c633c948d2?auto=format&fit=crop&w=600&q=80')]"></div>
+                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold text-white mb-2">Stateless Gmail Agent</h3>
+                    <p class="text-blue-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">OpenAI Agent & API Automation</p>
+                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Built a Python-based autonomous agent interfacing directly with the Google Workspace to fully automate email triage and response drafting.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Architected a stateless workflow that leverages the OpenAI Agent framework to perform complex reasoning without requiring persistent database storage, ensuring high privacy and speed.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Managed secure authentication utilizing OAuth 2.0 to access protected mailbox endpoints.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                        <span class="base-tag">OpenAI Agent</span><span class="base-tag">Gmail API</span><span class="base-tag">OAuth 2.0</span><span class="base-tag">Python</span>
+                    </div>
+                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
+                        <a href="https://github.com/abh1shekChoudhary/Gmail_Agent" target="_blank" class="text-sm font-mono text-gray-400 hover:text-blue-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>View Execution Script</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card mech-cut p-8 flex flex-col md:flex-row justify-between md:col-span-2">
+                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80')]"></div>
+                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
+                <div class="card-content w-full md:w-3/4">
+                    <h3 class="text-2xl font-bold text-white mb-2">Food Prep Forecaster</h3>
+                    <p class="text-blue-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Deep Learning & Predictive Analytics</p>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        Designed to combat institutional food waste by accurately forecasting meal consumption demand. Architected a predictive data pipeline capable of generating complex synthetic datasets to train a highly optimized Neural Network. 
+                    </p>
+                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Utilized TensorFlow and Keras to build models achieving R² scores between 0.85 and 0.94.</li>
+                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Optimized the network with early stopping and hyperparameter tuning using Scikit-learn, projecting an estimated 25% reduction in inventory waste.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                        <span class="base-tag">TensorFlow</span><span class="base-tag">Keras</span><span class="base-tag">Scikit-learn</span><span class="base-tag">Python</span>
+                    </div>
+                    <div class="pt-6 border-t border-gray-800 flex justify-start items-center mt-auto">
+                        <a href="https://colab.research.google.com/drive/1YYbQMDB1b7_wNEX4wKxrLNr41MS5Mqb4?usp=sharing" target="_blank" class="text-sm font-mono text-blue-400 hover:text-white transition-colors"><i data-lucide="book-open" class="w-4 h-4 inline mr-2"></i>Inspect Colab Model Notebook</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </section>
 
   <section id="contact" class="py-24 px-6 section">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-4xl font-bold font-display gradient-title mb-6">Get In Touch</h2>
-      <p class="text-gray-400 mb-10 text-lg">
-        I am currently working as an <span class="highlight">AI/ML Intern</span> and am open to discussing how I can bring value to your team. I am available for <span class="highlight">Full-time opportunities</span> starting May 2026.
+      <div class="inline-block mb-4 px-3 py-1 border border-orange-500/30 bg-orange-500/10 text-orange-400 font-mono text-xs tracking-wider mech-cut">
+        SYSTEM.SHUTDOWN_HOOK
+      </div>
+      <h2 class="text-4xl font-bold font-display gradient-title mb-6">Establish Connection</h2>
+      <p class="text-gray-400 mb-10 text-lg font-mono">
+        > Awaiting new challenges. Ready to scale systems and intelligent agents.<br>
+        > Status: Available for engineering roles starting June 2026.
       </p>
       <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
-        <a href="mailto:abhi1312choudhary@gmail.com" class="header-link text-lg"><i data-lucide="mail" class="inline-block mr-2 w-5 h-5"></i>Email</a>
-        <a href="https://github.com/abh1shekChoudhary" target="_blank" class="header-link text-lg"><i data-lucide="github" class="inline-block mr-2 w-5 h-5"></i>GitHub</a>
-        <a href="https://linkedin.com/in/abhishek-choudhary-991634251/" target="_blank" class="header-link text-lg"><i data-lucide="linkedin" class="inline-block mr-2 w-5 h-5"></i>LinkedIn</a>
+        <a href="mailto:abhi1312choudhary@gmail.com" class="header-link text-lg flex items-center"><i data-lucide="mail" class="mr-2 w-5 h-5"></i>abhi1312choudhary@gmail.com</a>
+        <a href="https://github.com/abh1shekChoudhary" target="_blank" class="header-link text-lg flex items-center"><i data-lucide="github" class="mr-2 w-5 h-5"></i>GitHub Platform</a>
+        <a href="https://linkedin.com/in/abhishek-choudhary-991634251/" target="_blank" class="header-link text-lg flex items-center"><i data-lucide="linkedin" class="mr-2 w-5 h-5"></i>Professional Network</a>
       </div>
     </div>
   </section>
 
-  <footer class="py-8 px-6 text-center text-gray-500 text-sm border-t border-gray-700/50">
-    &copy; 2026 Abhishek Choudhary. All rights reserved.
+  <footer class="py-8 px-6 text-center text-gray-600 font-mono text-xs border-t border-gray-800">
+    <p>Compiled & Shipped by Abhishek Choudhary // 2026</p>
   </footer>
 
   <script>
     lucide.createIcons();
+
+    function showDomain(domain) {
+        const sdeBtn = document.getElementById('toggle-sde');
+        const aiBtn = document.getElementById('toggle-ai');
+        const sdeGrid = document.getElementById('sde-grid');
+        const aiGrid = document.getElementById('ai-grid');
+
+        if (domain === 'sde') {
+            sdeBtn.classList.add('toggle-active-sde');
+            aiBtn.classList.remove('toggle-active-ai');
+            
+            aiGrid.classList.remove('fade-enter-active');
+            aiGrid.classList.add('hidden');
+            
+            sdeGrid.classList.remove('hidden');
+            setTimeout(() => sdeGrid.classList.add('fade-enter-active'), 10);
+        } else {
+            aiBtn.classList.add('toggle-active-ai');
+            sdeBtn.classList.remove('toggle-active-sde');
+            
+            sdeGrid.classList.remove('fade-enter-active');
+            sdeGrid.classList.add('hidden');
+            
+            aiGrid.classList.remove('hidden');
+            setTimeout(() => aiGrid.classList.add('fade-enter-active'), 10);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const terminalContent = document.getElementById('terminal-content');
+      const commands = [
+        { text: "> mvn spring-boot:run", delay: 700, type: 'cmd' },
+        { text: "[INFO] Starting Scalable Microservices on port 8080...", delay: 400, type: 'log' },
+        { text: "[INFO] Infrastructure robust and active. [OK]", delay: 800, type: 'success' },
+        { text: "> python main_agent.py --deploy", delay: 900, type: 'cmd' },
+        { text: "Loading LLM Engine... [OK]", delay: 300, type: 'log' },
+        { text: "Connecting autonomous workflows... [OK]", delay: 500, type: 'log' },
+        { text: "System State: Fully Integrated & Operational.", delay: 0, type: 'success' }
+      ];
+
+      async function typeCommand(command) {
+        return new Promise(resolve => {
+          let i = 0;
+          const typingInterval = setInterval(() => {
+            terminalContent.innerHTML += command.text.charAt(i);
+            i++;
+            if (i >= command.text.length) {
+              clearInterval(typingInterval);
+              terminalContent.innerHTML += '\n';
+              resolve();
+            }
+          }, 25);
+        });
+      }
+
+      async function runTerminal() {
+        for (const cmd of commands) {
+          await new Promise(r => setTimeout(r, 400));
+          
+          if (cmd.type === 'cmd') {
+            terminalContent.innerHTML += '<span class="text-orange-400"></span>'; 
+            await typeCommand(cmd);
+          } else if (cmd.type === 'success') {
+            terminalContent.innerHTML += `<span class="text-green-400">${cmd.text}</span>\n`;
+          } else {
+            terminalContent.innerHTML += `<span class="text-gray-500">${cmd.text}</span>\n`;
+          }
+          await new Promise(r => setTimeout(r, cmd.delay));
+        }
+      }
+      runTerminal();
+    });
   </script>
 </body>
 </html>
