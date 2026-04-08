@@ -1,588 +1,1816 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abhishek Choudhary | SDE & AI Engineer</title>
-  <meta name="description" content="Abhishek Choudhary — Architecting robust backend systems and engineering autonomous AI workflows." />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abhishek Choudhary | AC_OS v2.6</title>
+<meta name="description" content="Abhishek Choudhary — SDE & AI Engineer. Enterprise Java systems. Autonomous AI workflows."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script data-goatcounter="https://abhishekportfolio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="ff899915-f96d-4f0f-b3e3-b1e67090b482"></script>
+<style>
+:root {
+  --bg: #05070d;
+  --surface: #0a0e1a;
+  --surface2: #0f1525;
+  --border: rgba(139,92,246,0.15);
+  --border2: rgba(139,92,246,0.3);
+  --purple: #8b5cf6;
+  --purple-dim: rgba(139,92,246,0.6);
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.7);
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --text: #e2e8f0;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --mono: 'JetBrains Mono', monospace;
+  --display: 'Syne', sans-serif;
+  --taskbar-h: 40px;
+  --topbar-h: 32px;
+}
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+* { margin:0; padding:0; box-sizing:border-box; }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  height: 100vh;
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
+}
 
-  <script data-goatcounter="https://abhishekportfolio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="ff899915-f96d-4f0f-b3e3-b1e67090b482"></script>
-  <style>
-    body {
-      background-color: #0a0f1a;
-      color: #E5E7EB; 
-      font-family: 'Inter', sans-serif;
-    }
-    .font-display { font-family: 'Space Grotesk', sans-serif; }
-    .font-mono { font-family: 'Fira Code', monospace; }
-    .section { scroll-margin-top: 80px; }
-    
-    .mech-cut {
-      clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);
-    }
-    
-    .gradient-title {
-      background: linear-gradient(to right, #F97316, #EA580C);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
-    .btn {
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      cursor: pointer;
-    }
-    .btn-primary { background: #F97316; color: #111827; border: 1px solid #F97316; }
-    .btn-primary:hover { background: #FB923C; transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(249, 115, 22, 0.5); }
-    .btn-outline { border: 1px solid rgba(255, 255, 255, 0.2); color: #E5E7EB; background: rgba(255, 255, 255, 0.05); }
-    .btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.4); transform: translateY(-2px); color: #fff; }
-    
-    .header-link { color: #9CA3AF; transition: color 0.2s ease; position: relative; padding-bottom: 4px; }
-    .header-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #F97316; transition: width 0.3s ease; }
-    .header-link:hover { color: #F3F4F6; }
-    .header-link:hover::after { width: 100%; }
+/* ── BOOT SCREEN ── */
+#boot {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2rem;
+}
+#boot-logo {
+  font-family: var(--display);
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 800;
+  color: var(--purple);
+  letter-spacing: -2px;
+  opacity: 0;
+  animation: fadeIn 0.5s 0.3s forwards;
+}
+#boot-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 4px;
+  opacity: 0;
+  animation: fadeIn 0.4s 0.8s forwards;
+}
+#boot-bar-wrap {
+  width: 300px;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 0.3s 1.2s forwards;
+}
+#boot-bar {
+  height: 100%;
+  width: 0;
+  background: var(--purple);
+  animation: bootProgress 1.8s 1.4s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+#boot-log {
+  font-size: 0.65rem;
+  color: var(--green-dim);
+  text-align: center;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeIn 0.3s 1.5s forwards;
+  min-height: 80px;
+}
+@keyframes bootProgress { to { width: 100%; } }
+@keyframes fadeIn { to { opacity:1; } }
+@keyframes fadeOut { to { opacity:0; pointer-events:none; } }
 
-    .terminal-cursor { display: inline-block; width: 8px; height: 1.2em; background-color: #F97316; vertical-align: middle; animation: blink 1s step-end infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+/* ── DESKTOP ── */
+#desktop {
+  position: fixed; inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  display: flex; flex-direction: column;
+}
+#desktop.visible { opacity: 1; }
 
-    /* Bento Box & Project Cards */
-    .bento-card, .project-card {
-      background-color: #111827;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7); border-color: rgba(249, 115, 22, 0.3); }
-    .bento-glow { position: absolute; top: 0; right: 0; width: 200px; height: 200px; border-radius: 50%; transform: translate(30%, -30%); pointer-events: none; opacity: 0.15; transition: opacity 0.3s ease; }
-    
-    .card-backdrop { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; opacity: 0.12; transition: opacity 0.4s ease; mix-blend-mode: luminosity; }
-    .project-card:hover .card-backdrop { opacity: 0.25; }
-    
-    .card-content { position: relative; z-index: 10; height: 100%; display: flex; flex-direction: column; }
+/* TOPBAR */
+#topbar {
+  height: var(--topbar-h);
+  background: rgba(5,7,13,0.95);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 14px;
+  gap: 0;
+  flex-shrink: 0;
+  backdrop-filter: blur(20px);
+  z-index: 100;
+}
+#topbar-logo {
+  font-size: 0.7rem;
+  color: var(--purple);
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-right: auto;
+}
+#topbar-items { display: flex; gap: 16px; align-items: center; }
+.topbar-item { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 1px; }
+#topbar-clock { font-size: 0.65rem; color: var(--purple-dim); letter-spacing: 2px; }
+#topbar-status {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.6rem; color: var(--green-dim);
+}
+.status-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-    .base-tag { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); color: #D1D5DB; }
+/* WORKSPACE */
+#workspace {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
 
-    .tag-orange { color: #FB923C; border-color: rgba(249, 115, 22, 0.3); }
-    .tag-blue { color: #60A5FA; border-color: rgba(59, 130, 246, 0.3); }
+/* subtle grid */
+#workspace::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
 
-    .toggle-active-sde { background: #F97316 !important; color: #111827 !important; border-color: #F97316 !important; }
-    .toggle-active-ai { background: #3B82F6 !important; color: #111827 !important; border-color: #3B82F6 !important; }
-    
-    /* Fade transition for project grids */
-    .fade-enter { opacity: 0; transform: translateY(10px); }
-    .fade-enter-active { opacity: 1; transform: translateY(0); transition: opacity 0.4s ease, transform 0.4s ease; }
-  </style>
+/* DESKTOP ICONS */
+#icon-grid {
+  position: absolute;
+  top: 20px; left: 16px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+}
+.desk-icon {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 4px;
+  width: 70px;
+  padding: 8px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: center;
+}
+.desk-icon:hover { background: rgba(139,92,246,0.1); }
+.desk-icon.selected { background: rgba(139,92,246,0.2); }
+.desk-icon-img {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  border: 1px solid var(--border);
+}
+.desk-icon-label { font-size: 0.55rem; color: var(--text-dim); line-height: 1.3; }
+
+/* WINDOWS */
+.window {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(139,92,246,0.05);
+  transition: box-shadow 0.2s;
+  min-width: 320px;
+  min-height: 200px;
+}
+.window.focused {
+  border-color: var(--border2);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(139,92,246,0.2), 0 0 30px rgba(139,92,246,0.05);
+  z-index: 50 !important;
+}
+.window.minimized { display: none; }
+
+.win-titlebar {
+  height: 32px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+  cursor: move;
+  flex-shrink: 0;
+}
+.win-controls { display: flex; gap: 5px; }
+.win-btn {
+  width: 11px; height: 11px; border-radius: 50%;
+  cursor: pointer; border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0;
+  transition: filter 0.15s;
+}
+.win-btn:hover { filter: brightness(1.3); font-size: 8px; color: rgba(0,0,0,0.6); }
+.win-btn.close { background: #ff5f57; }
+.win-btn.min { background: #ffbd2e; }
+.win-btn.max { background: #28c840; }
+.win-title {
+  font-size: 0.6rem; color: var(--text-muted);
+  letter-spacing: 1.5px; margin-left: 4px;
+  font-weight: 600;
+}
+.win-body { flex: 1; overflow-y: auto; overflow-x: hidden; }
+.win-body::-webkit-scrollbar { width: 4px; }
+.win-body::-webkit-scrollbar-track { background: transparent; }
+.win-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+/* TASKBAR */
+#taskbar {
+  height: var(--taskbar-h);
+  background: rgba(5,7,13,0.97);
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 10px;
+  gap: 4px;
+  flex-shrink: 0;
+  backdrop-filter: blur(20px);
+  z-index: 100;
+}
+.tb-item {
+  height: 28px;
+  padding: 0 12px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.tb-item:hover { background: rgba(139,92,246,0.1); color: var(--text-dim); border-color: var(--border); }
+.tb-item.active { background: rgba(139,92,246,0.15); color: var(--purple-dim); border-color: var(--border2); }
+.tb-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--purple); }
+#taskbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+#taskbar-available {
+  font-size: 0.55rem;
+  color: var(--green-dim);
+  border: 1px solid rgba(34,197,94,0.2);
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* ═══════════════════════════════════
+   WINDOW CONTENT STYLES
+═══════════════════════════════════ */
+
+/* IDENTITY WINDOW */
+.identity-win {
+  padding: 28px 28px 24px;
+  height: 100%;
+}
+.id-badge {
+  display: inline-block;
+  font-size: 0.55rem; color: var(--purple); letter-spacing: 3px;
+  border: 1px solid var(--border2);
+  padding: 3px 10px; margin-bottom: 16px;
+  background: rgba(139,92,246,0.05);
+}
+.id-name {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.id-role {
+  font-size: 0.65rem; color: var(--purple-dim);
+  letter-spacing: 3px; margin-bottom: 18px;
+}
+.id-divider { width: 40px; height: 2px; background: var(--purple); margin-bottom: 16px; }
+.id-desc {
+  font-size: 0.72rem; color: var(--text-dim);
+  line-height: 1.9; margin-bottom: 20px;
+  max-width: 380px; font-family: var(--mono);
+}
+.id-metrics { display: flex; gap: 20px; margin-bottom: 24px; }
+.id-metric { }
+.id-metric-val {
+  font-size: 1.4rem; font-weight: 700;
+  color: #fff; line-height: 1;
+  font-family: var(--display);
+}
+.id-metric-label { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 1px; margin-top: 2px; }
+.id-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.id-btn {
+  padding: 8px 18px;
+  font-size: 0.65rem; letter-spacing: 1.5px;
+  cursor: pointer; transition: all 0.2s;
+  text-decoration: none; display: inline-block;
+  font-family: var(--mono);
+}
+.id-btn-primary {
+  background: var(--purple); color: #fff;
+  border: 1px solid var(--purple);
+}
+.id-btn-primary:hover { background: #7c3aed; transform: translateY(-1px); }
+.id-btn-outline {
+  background: transparent; color: var(--text-dim);
+  border: 1px solid var(--border2);
+}
+.id-btn-outline:hover { border-color: var(--purple-dim); color: var(--purple); transform: translateY(-1px); }
+.id-available {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.6rem; color: var(--green-dim);
+  border: 1px solid rgba(34,197,94,0.2);
+  padding: 4px 10px; margin-top: 16px;
+  background: rgba(34,197,94,0.05);
+}
+
+/* PROJECTS WINDOW */
+.projects-win { padding: 0; height: 100%; }
+.proj-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+  font-size: 0.6rem; color: var(--text-muted);
+  letter-spacing: 2px; display: flex; align-items: center; gap: 8px;
+}
+.proj-path { color: var(--purple-dim); }
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  padding: 1px;
+}
+.proj-file {
+  background: var(--surface);
+  padding: 16px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.proj-file:hover { background: rgba(139,92,246,0.08); }
+.proj-file-icon {
+  font-size: 1.6rem; line-height: 1;
+  margin-bottom: 2px;
+}
+.proj-file-name { font-size: 0.6rem; color: var(--text); font-weight: 600; }
+.proj-file-type { font-size: 0.52rem; color: var(--text-muted); letter-spacing: 1px; }
+.proj-file-tag {
+  font-size: 0.5rem; padding: 2px 6px;
+  border-radius: 3px; display: inline-block;
+  margin-top: 2px; width: fit-content;
+}
+.tag-ai { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.tag-sde { background: rgba(249,115,22,0.15); color: #fb923c; }
+.tag-dev { background: rgba(245,158,11,0.15); color: var(--amber); }
+
+/* LIVE DEPLOY BADGE on file icons */
+.live-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.48rem; color: var(--green);
+  letter-spacing: 1px; margin-top: 1px;
+}
+.live-badge-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 1.8s infinite;
+  flex-shrink: 0;
+}
+
+/* DEPLOY PANEL inside project detail */
+.pd-deploy {
+  margin-top: 16px;
+  background: #000;
+  border: 1px solid rgba(34,197,94,0.25);
+  overflow: hidden;
+}
+.pd-deploy-bar {
+  background: rgba(34,197,94,0.08);
+  border-bottom: 1px solid rgba(34,197,94,0.15);
+  padding: 5px 12px;
+  display: flex; align-items: center; gap: 7px;
+  font-size: 0.52rem; color: rgba(34,197,94,0.7);
+  letter-spacing: 2px;
+}
+.pd-deploy-bar-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 1.8s infinite;
+}
+.pd-deploy-body { padding: 10px 12px; }
+.pd-deploy-line {
+  font-size: 0.6rem; line-height: 1.9;
+  display: flex; gap: 8px;
+}
+.pd-deploy-prompt { color: rgba(34,197,94,0.5); flex-shrink: 0; }
+.pd-deploy-cmd { color: #e2e8f0; }
+.pd-deploy-url {
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(34,197,94,0.3);
+  transition: border-color 0.15s;
+}
+.pd-deploy-url:hover { border-color: var(--green); }
+.pd-deploy-out { color: rgba(34,197,94,0.55); }
+.pd-launch {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.pd-launch-btn {
+  padding: 6px 16px;
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.35);
+  color: var(--green);
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 1.5px; cursor: pointer;
+  text-decoration: none; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.pd-launch-btn:hover {
+  background: rgba(34,197,94,0.18);
+  border-color: var(--green);
+  box-shadow: 0 0 14px rgba(34,197,94,0.12);
+}
+.pd-launch-btn-arrow { font-size: 0.7rem; transition: transform 0.2s; }
+.pd-launch-btn:hover .pd-launch-btn-arrow { transform: translateX(3px); }
+.pd-github-btn {
+  padding: 6px 16px;
+  background: var(--purple);
+  border: 1px solid var(--purple);
+  color: #fff;
+  font-family: var(--mono); font-size: 0.6rem;
+  letter-spacing: 1.5px; cursor: pointer;
+  text-decoration: none; transition: all 0.2s;
+}
+.pd-github-btn:hover { background: #7c3aed; }
+.pd-github-only {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 14px;
+}
+
+/* PROJECT DETAIL MODAL */
+.proj-detail { padding: 24px; }
+.pd-tag {
+  font-size: 0.55rem; letter-spacing: 2px;
+  padding: 2px 8px; border-radius: 3px;
+  display: inline-block; margin-bottom: 12px;
+}
+.pd-title {
+  font-family: var(--display);
+  font-size: 1.5rem; font-weight: 800;
+  color: #fff; margin-bottom: 8px; line-height: 1.2;
+}
+.pd-subtitle { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 16px; }
+.pd-desc { font-size: 0.7rem; color: var(--text-dim); line-height: 1.9; margin-bottom: 18px; }
+.pd-bullets { margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
+.pd-bullet {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 0.68rem; color: var(--text-dim); line-height: 1.6;
+}
+.pd-bullet-icon { color: var(--purple); flex-shrink: 0; margin-top: 2px; }
+.pd-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 18px; }
+.pd-tech {
+  font-size: 0.55rem; padding: 3px 8px;
+  border: 1px solid var(--border2);
+  color: var(--purple-dim); letter-spacing: 0.5px;
+}
+.pd-links { display: flex; gap: 10px; }
+.pd-link {
+  font-size: 0.62rem; padding: 6px 14px;
+  border: 1px solid var(--border2);
+  color: var(--text-dim); cursor: pointer;
+  text-decoration: none; transition: all 0.2s;
+  letter-spacing: 1px;
+}
+.pd-link:hover { border-color: var(--purple); color: var(--purple); }
+.pd-link.primary { background: var(--purple); color: #fff; border-color: var(--purple); }
+.pd-link.primary:hover { background: #7c3aed; }
+
+/* SKILLS WINDOW */
+.skills-win { padding: 20px; height: 100%; }
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.skill-group { }
+.skill-group-title {
+  font-size: 0.55rem; color: var(--text-muted);
+  letter-spacing: 2px; margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.skill-bar { margin-bottom: 8px; }
+.skill-name { font-size: 0.6rem; color: var(--text-dim); margin-bottom: 4px; display: flex; justify-content: space-between; }
+.skill-name span { color: var(--text-muted); }
+.skill-track { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.skill-fill { height: 100%; border-radius: 2px; transition: width 1s cubic-bezier(0.4,0,0.2,1); width: 0; }
+.skill-fill.purple { background: var(--purple); }
+.skill-fill.blue { background: var(--blue); }
+.skill-fill.green { background: var(--green); }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.skill-chip {
+  font-size: 0.55rem; padding: 3px 8px;
+  border: 1px solid var(--border);
+  color: var(--text-muted); letter-spacing: 0.5px;
+  border-radius: 3px;
+}
+
+/* EXPERIENCE WINDOW */
+.exp-win { padding: 24px; }
+.exp-header-tag {
+  font-size: 0.55rem; color: var(--blue);
+  letter-spacing: 3px; margin-bottom: 16px;
+  border-left: 2px solid var(--blue);
+  padding-left: 10px;
+}
+.exp-company {
+  font-family: var(--display);
+  font-size: 1.4rem; font-weight: 800;
+  color: #fff; margin-bottom: 4px;
+}
+.exp-company a { color: inherit; text-decoration: none; }
+.exp-company a:hover { color: var(--purple); }
+.exp-role { font-size: 0.7rem; color: var(--purple-dim); letter-spacing: 1px; margin-bottom: 4px; }
+.exp-date {
+  font-size: 0.6rem; color: var(--text-muted);
+  border: 1px solid var(--border); padding: 2px 8px;
+  display: inline-block; margin-bottom: 18px;
+}
+.exp-tagline { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 14px; line-height: 1.7; }
+.exp-bullets { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.exp-bullet {
+  display: flex; gap: 10px;
+  font-size: 0.68rem; color: var(--text-muted); line-height: 1.7;
+}
+.exp-bullet-arrow { color: var(--purple); flex-shrink: 0; }
+.exp-stack { display: flex; flex-wrap: wrap; gap: 5px; }
+.exp-tag {
+  font-size: 0.55rem; padding: 2px 8px;
+  background: rgba(59,130,246,0.1); color: #60a5fa;
+  border: 1px solid rgba(59,130,246,0.2);
+}
+
+/* TERMINAL WINDOW */
+.terminal-win {
+  background: #000;
+  height: 100%;
+  padding: 14px 16px;
+  font-size: 0.7rem;
+  line-height: 1.7;
+  overflow-y: auto;
+}
+.terminal-win::-webkit-scrollbar { width: 3px; }
+.terminal-win::-webkit-scrollbar-thumb { background: var(--border2); }
+.t-line { display: flex; gap: 8px; margin-bottom: 2px; }
+.t-prompt { color: var(--purple); flex-shrink: 0; }
+.t-cmd { color: var(--green); }
+.t-out { color: var(--text-muted); }
+.t-out.success { color: var(--green-dim); }
+.t-out.error { color: #f87171; }
+.t-out.info { color: #60a5fa; }
+.t-out.warn { color: var(--amber); }
+.t-input-line { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+.t-cursor { display: inline-block; width: 7px; height: 14px; background: var(--purple); animation: blink 1s step-end infinite; vertical-align: middle; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* CONTACT WINDOW */
+.contact-win { padding: 24px; }
+.contact-title {
+  font-family: var(--display); font-size: 1.4rem;
+  font-weight: 800; color: #fff; margin-bottom: 6px;
+}
+.contact-sub { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 24px; }
+.contact-items { display: flex; flex-direction: column; gap: 12px; }
+.contact-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  text-decoration: none;
+  transition: all 0.2s; cursor: pointer;
+}
+.contact-item:hover { border-color: var(--border2); background: rgba(139,92,246,0.08); transform: translateX(4px); }
+.ci-icon { font-size: 1rem; width: 20px; text-align: center; }
+.ci-label { font-size: 0.62rem; color: var(--text-muted); letter-spacing: 1px; }
+.ci-value { font-size: 0.7rem; color: var(--text); margin-top: 1px; }
+
+/* ABOUT/README WINDOW */
+.readme-win { padding: 24px; }
+.readme-h1 {
+  font-size: 0.6rem; color: var(--purple); letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+.readme-name {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800; color: #fff;
+  margin-bottom: 14px; line-height: 1.1;
+}
+.readme-p {
+  font-size: 0.7rem; color: var(--text-dim);
+  line-height: 1.9; margin-bottom: 14px;
+}
+.readme-section {
+  font-size: 0.58rem; color: var(--purple);
+  letter-spacing: 2px; margin: 16px 0 8px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+.readme-edu {
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  margin-bottom: 8px;
+}
+.edu-degree { font-size: 0.68rem; color: #fff; font-weight: 600; margin-bottom: 2px; }
+.edu-school { font-size: 0.62rem; color: var(--purple-dim); }
+.edu-year { font-size: 0.58rem; color: var(--text-muted); margin-top: 3px; }
+
+/* NOTIFICATION */
+.notif {
+  position: absolute;
+  bottom: 50px; right: 16px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  max-width: 280px;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.notif.show { opacity: 1; transform: translateY(0); }
+.notif-title { color: var(--purple); font-weight: 600; margin-bottom: 3px; letter-spacing: 1px; }
+
+/* CMD PALETTE */
+#cmd-palette {
+  position: absolute;
+  top: 80px; left: 50%; transform: translateX(-50%);
+  width: 500px; max-width: 90vw;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 300;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+  display: none;
+}
+#cmd-palette.open { display: block; }
+#cmd-input {
+  width: 100%; padding: 14px 16px;
+  background: transparent; border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text); font-family: var(--mono);
+  font-size: 0.8rem; outline: none;
+}
+#cmd-results { padding: 6px; }
+.cmd-item {
+  padding: 8px 12px;
+  border-radius: 4px; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.65rem; color: var(--text-dim);
+  transition: background 0.1s;
+}
+.cmd-item:hover, .cmd-item.selected { background: rgba(139,92,246,0.15); color: var(--text); }
+.cmd-item-icon { color: var(--purple-dim); width: 16px; }
+.cmd-item-label { flex: 1; }
+.cmd-item-hint { font-size: 0.55rem; color: var(--text-muted); }
+
+/* ── DESKTOP WIDGET PANEL ── */
+#desktop-panel {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 260px;
+  display: flex; flex-direction: column;
+  gap: 10px;
+  z-index: 2;
+  pointer-events: none;
+}
+.dp-card {
+  background: rgba(10,14,26,0.82);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+.dp-card-header {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(15,21,37,0.6);
+}
+.dp-card-title {
+  font-size: 0.52rem; color: var(--text-muted);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.dp-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
+.dp-body { padding: 10px 12px; }
+
+/* WELCOME CARD */
+.welcome-name {
+  font-family: var(--display);
+  font-size: 1.05rem; font-weight: 800;
+  color: #fff; line-height: 1.1; margin-bottom: 3px;
+}
+.welcome-role { font-size: 0.55rem; color: var(--purple-dim); letter-spacing: 2px; margin-bottom: 10px; }
+.welcome-available {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.52rem; color: var(--green-dim);
+  border: 1px solid rgba(34,197,94,0.18);
+  padding: 2px 8px; background: rgba(34,197,94,0.05);
+  margin-bottom: 10px;
+}
+.welcome-tip {
+  font-size: 0.58rem; color: var(--text-muted);
+  line-height: 1.7; border-left: 2px solid var(--border2);
+  padding-left: 8px;
+}
+.welcome-tip span { color: var(--purple-dim); }
+
+/* SYSTEM STATS */
+.stat-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+}
+.stat-row:last-child { margin-bottom: 0; }
+.stat-row-label { font-size: 0.52rem; color: var(--text-muted); letter-spacing: 1px; width: 52px; flex-shrink: 0; }
+.stat-row-track { flex: 1; height: 2px; background: rgba(255,255,255,0.05); overflow: hidden; }
+.stat-row-fill { height: 100%; border-radius: 1px; transition: width 0.8s ease; }
+.stat-row-val { font-size: 0.52rem; color: var(--text-muted); width: 28px; text-align: right; flex-shrink: 0; }
+
+/* INSTRUCTIONS */
+.instr-list { display: flex; flex-direction: column; gap: 7px; }
+.instr-item { display: flex; align-items: flex-start; gap: 8px; }
+.instr-key {
+  font-size: 0.48rem; padding: 1px 6px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid var(--border2);
+  color: var(--purple-dim); white-space: nowrap;
+  letter-spacing: 0.5px; flex-shrink: 0;
+  line-height: 1.6;
+}
+.instr-desc { font-size: 0.55rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ACTIVITY FEED */
+.activity-list { display: flex; flex-direction: column; gap: 0; }
+.activity-item {
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-size: 0.55rem;
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-time { color: var(--text-muted); flex-shrink: 0; width: 36px; }
+.activity-text { color: var(--text-dim); line-height: 1.5; }
+.activity-text .hl { }
+
+/* SKILL PILLS */
+.skill-pill-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+.skill-pill {
+  font-size: 0.5rem; padding: 2px 7px;
+  border-radius: 2px; letter-spacing: 0.5px;
+}
+.sp-java { background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.2); }
+.sp-ai   { background: rgba(59,130,246,0.12);  color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+.sp-tool { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+
+/* CONTEXT MENU */
+#ctx-menu {
+  position: absolute;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 4px;
+  z-index: 500;
+  min-width: 180px;
+  display: none;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+#ctx-menu.open { display: block; }
+.ctx-item {
+  padding: 7px 14px;
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex; align-items: center; gap: 8px;
+  letter-spacing: 0.5px;
+}
+.ctx-item:hover { background: rgba(139,92,246,0.12); color: var(--text); }
+.ctx-separator { height: 1px; background: var(--border); margin: 4px 0; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .window { min-width: unset; width: 92vw !important; left: 4vw !important; }
+  .proj-grid { grid-template-columns: repeat(2, 1fr); }
+  #icon-grid { display: none; }
+  #desktop-panel { display: none; }
+}
+</style>
 </head>
-<body class="min-h-screen relative">
+<body>
 
-  <header class="fixed top-0 w-full z-50 bg-[#0a0f1a]/90 backdrop-blur-lg border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#home" class="text-xl font-bold font-mono text-gray-300 hover:text-white transition-colors">
-        <span class="text-orange-500">~/</span>abhishek
-      </a>
-      <nav class="hidden md:flex space-x-6 lg:space-x-8 text-sm font-medium">
-        <a href="#skills" class="header-link">Architecture</a>
-        <a href="#experience" class="header-link">Experience</a>
-        <a href="#flagship" class="header-link">Flagships</a>
-        <a href="#projects" class="header-link">Deployments</a>
-      </nav>
+<div id="boot">
+  <div id="boot-logo">AC_OS</div>
+  <div id="boot-sub">PORTFOLIO OPERATING SYSTEM v2.6</div>
+  <div id="boot-bar-wrap"><div id="boot-bar"></div></div>
+  <div id="boot-log"></div>
+</div>
+
+<div id="desktop">
+
+  <div id="topbar">
+    <div id="topbar-logo">AC_OS</div>
+    <div id="topbar-items">
+      <div class="topbar-item" style="color:var(--text-muted)">CPU <span id="cpu-val">12</span>%</div>
+      <div class="topbar-item" style="color:var(--text-muted)">MEM <span id="mem-val">34</span>%</div>
+      <div class="topbar-item" style="color:var(--green-dim)">●&nbsp;ONLINE</div>
+      <div id="topbar-clock">--:--:--</div>
     </div>
-  </header>
+  </div>
 
-  <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-12 overflow-hidden">
-    <div class="absolute inset-0 -z-10 h-full w-full bg-[radial-gradient(#F97316_1px,transparent_1px)] [background-size:40px_40px] opacity-10"></div>
-    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center section">
-      <div class="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
-        <div class="inline-block mb-4 px-3 py-1 border border-orange-500/30 bg-orange-500/10 text-orange-400 font-mono text-xs tracking-wider mech-cut">
-          SYSTEM.STATUS == "READY"
+  <div id="workspace">
+
+    <div id="icon-grid">
+      <div class="desk-icon" ondblclick="openWindow('identity')" onclick="selectIcon(this)">
+        <div class="desk-icon-img" style="background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.3)">👤</div>
+        <div class="desk-icon-label">identity.exe</div>
+      </div>
+      <div class="desk-icon" ondblclick="openWindow('projects')" onclick="selectIcon(this)">
+        <div class="desk-icon-img" style="background:rgba(249,115,22,0.1);border-color:rgba(249,115,22,0.2)">📁</div>
+        <div class="desk-icon-label">projects/</div>
+      </div>
+      <div class="desk-icon" ondblclick="openWindow('skills')" onclick="selectIcon(this)">
+        <div class="desk-icon-img" style="background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.2)">⚡</div>
+        <div class="desk-icon-label">skills.sys</div>
+      </div>
+      <div class="desk-icon" ondblclick="openWindow('experience')" onclick="selectIcon(this)">
+        <div class="desk-icon-img" style="background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.2)">💼</div>
+        <div class="desk-icon-label">exp.log</div>
+      </div>
+      <div class="desk-icon" ondblclick="openWindow('terminal')" onclick="selectIcon(this)">
+        <div class="desk-icon-img" style="background:rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.1)">⬛</div>
+        <div class="desk-icon-label">terminal</div>
+      </div>
+      <div class="desk-icon" ondblclick="openWindow('readme')" onclick="selectIcon(this)">
+        <div class="desk-icon-img" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2)">📄</div>
+        <div class="desk-icon-label">README.md</div>
+      </div>
+      <div class="desk-icon" ondblclick="openWindow('contact')" onclick="selectIcon(this)">
+        <div class="desk-icon-img" style="background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.2)">📡</div>
+        <div class="desk-icon-label">contact.sh</div>
+      </div>
+    </div>
+
+    <div id="desktop-panel">
+
+      <div class="dp-card">
+        <div class="dp-card-header">
+          <div class="dp-dot" style="background:var(--green)"></div>
+          <div class="dp-card-title">system.identity</div>
         </div>
-        <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold font-display mb-6 leading-tight text-white">
-          Architecting <span class="gradient-title">Systems.</span><br />
-          Engineering <span class="text-blue-500">AI.</span>
-        </h1>
-        <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-lg leading-relaxed">
-          I bridge the gap between intelligent reasoning and scalable infrastructure. Building enterprise Java backends and autonomous Python orchestration workflows.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <a href="#flagship" class="btn btn-primary mech-cut text-lg px-8 py-4">
-            <i data-lucide="award" class="mr-2"></i> Flagship Work
-          </a>
-          <a href="https://raw.githubusercontent.com/abh1shekChoudhary/Resume/main/Abhishek_Choudhary_SDE_AIML.pdf" target="_blank" class="btn btn-outline mech-cut text-lg px-8 py-4">
-            <i data-lucide="file-terminal" class="mr-2"></i> Init_Resume
-          </a>
+        <div class="dp-body">
+          <div class="welcome-name">Abhishek<br/>Choudhary</div>
+          <div class="welcome-role">SDE × AI ENGINEER</div>
+          <div class="welcome-available"><div class="status-dot"></div>AVAILABLE · JUN 2026</div>
+          <div class="welcome-tip"><span>Double-click</span> any icon on the left to open a window. <span>Drag</span> windows to rearrange. Press <span>Right-click</span> for quick commands.</div>
         </div>
       </div>
 
-      <div class="order-1 lg:order-2 w-full max-w-lg mx-auto lg:max-w-none shadow-2xl shadow-orange-900/10">
-        <div class="bg-gray-900 border border-gray-700 mech-cut overflow-hidden flex flex-col h-80 relative">
-          <div class="bg-gray-800 px-4 py-3 flex items-center border-b border-gray-700">
-            <div class="flex space-x-2">
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+      <div class="dp-card">
+        <div class="dp-card-header">
+          <div class="dp-dot" style="background:var(--purple)"></div>
+          <div class="dp-card-title">sys.monitor</div>
+        </div>
+        <div class="dp-body">
+          <div class="stat-row">
+            <div class="stat-row-label">JAVA</div>
+            <div class="stat-row-track"><div class="stat-row-fill" style="width:91%;background:#fb923c"></div></div>
+            <div class="stat-row-val">91%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-row-label">PYTHON</div>
+            <div class="stat-row-track"><div class="stat-row-fill" style="width:87%;background:#60a5fa"></div></div>
+            <div class="stat-row-val">87%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-row-label">Agentic AI</div>
+            <div class="stat-row-track"><div class="stat-row-fill" style="width:83%;background:var(--purple)"></div></div>
+            <div class="stat-row-val">83%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-row-label">BackEnd Systems</div>
+            <div class="stat-row-track"><div class="stat-row-fill" style="width:79%;background:var(--purple)"></div></div>
+            <div class="stat-row-val">79%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-row-label">DOCKER</div>
+            <div class="stat-row-track"><div class="stat-row-fill" style="width:76%;background:var(--green)"></div></div>
+            <div class="stat-row-val">76%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-row-label">CPU</div>
+            <div class="stat-row-track"><div class="stat-row-fill" id="live-cpu-bar" style="width:12%;background:var(--blue)"></div></div>
+            <div class="stat-row-val" id="live-cpu-pct">12%</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-row-label">MEM</div>
+            <div class="stat-row-track"><div class="stat-row-fill" id="live-mem-bar" style="width:34%;background:var(--blue)"></div></div>
+            <div class="stat-row-val" id="live-mem-pct">34%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-card">
+        <div class="dp-card-header">
+          <div class="dp-dot" style="background:var(--amber)"></div>
+          <div class="dp-card-title">shortcuts.cfg</div>
+        </div>
+        <div class="dp-body">
+          <div class="instr-list">
+            <div class="instr-item">
+              <div class="instr-key">DBL CLICK</div>
+              <div class="instr-desc">Open any desktop icon as a window</div>
             </div>
-            <div class="mx-auto text-xs font-mono text-gray-500">abhic@engineering-env:~</div>
+            <div class="instr-item">
+              <div class="instr-key">DRAG TITLE</div>
+              <div class="instr-desc">Move windows around the desktop</div>
+            </div>
+            <div class="instr-item">
+              <div class="instr-key">⌘ K</div>
+              <div class="instr-desc">Command palette — search anything</div>
+            </div>
+            <div class="instr-item">
+              <div class="instr-key">RIGHT CLICK</div>
+              <div class="instr-desc">Context menu on the desktop</div>
+            </div>
+            <div class="instr-item">
+              <div class="instr-key">TASKBAR</div>
+              <div class="instr-desc">Toggle any window open or closed</div>
+            </div>
           </div>
-          <div class="p-6 font-mono text-sm text-gray-300 flex-1 overflow-hidden relative bg-[#0d1117]">
-            <div id="terminal-content" class="whitespace-pre-wrap leading-relaxed"></div><span class="terminal-cursor"></span>
+        </div>
+      </div>
+
+      <div class="dp-card">
+        <div class="dp-card-header">
+          <div class="dp-dot" style="background:var(--blue);animation:pulse-dot 1.5s infinite"></div>
+          <div class="dp-card-title">activity.log</div>
+        </div>
+        <div class="dp-body">
+          <div class="activity-list" id="activity-feed">
+            <div class="activity-item">
+              <div class="activity-time" style="color:var(--green)">NOW</div>
+              <div class="activity-text"><span class="hl" style="color:#fb923c">Phoenix</span> v2 · failure diagnosis engine in dev</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-time">2026</div>
+              <div class="activity-text">Cynapse AI internship <span style="color:var(--text-muted)">(Oct 2025 – Feb 2026)</span></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-time">2025</div>
+              <div class="activity-text"><span style="color:#60a5fa">Sales Agent</span> — Gemini · Pinecone · MongoDB</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-time">2025</div>
+              <div class="activity-text"><span style="color:#60a5fa">Gmail Agent</span> — Gmail API + Gemini</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-time">2025</div>
+              <div class="activity-text"><span style="color:#fb923c">Mancala</span> — AWS EC2 · <a href="https://mancala-game.me/" target="_blank" style="color:var(--green);text-decoration:none;border-bottom:1px solid rgba(34,197,94,0.3)">● live</a></div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-time">2025</div>
+              <div class="activity-text"><span style="color:#fb923c">Smart Screener</span> — Spring Boot + Gemini API</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-time">2025</div>
+              <div class="activity-text"><span style="color:#fb923c">Mess App</span> — Vercel + Render · <a href="https://mess-application-front-end-angular.vercel.app/login" target="_blank" style="color:var(--green);text-decoration:none;border-bottom:1px solid rgba(34,197,94,0.3)">● live</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-card">
+        <div class="dp-card-header">
+          <div class="dp-dot" style="background:var(--text-muted)"></div>
+          <div class="dp-card-title">stack.env</div>
+        </div>
+        <div class="dp-body">
+          <div class="skill-pill-grid">
+            <span class="skill-pill sp-java">Java 17</span>
+            <span class="skill-pill sp-java">Spring Boot</span>
+            <span class="skill-pill sp-java">Spring Security</span>
+            <span class="skill-pill sp-java">WebSocket</span>
+            <span class="skill-pill sp-java">MySQL</span>
+            <span class="skill-pill sp-java">Docker</span>
+            <span class="skill-pill sp-java">AWS EC2</span>
+            <span class="skill-pill sp-ai">Python</span>
+            <span class="skill-pill sp-ai">Gemini API</span>
+            <span class="skill-pill sp-ai">Pinecone</span>
+            <span class="skill-pill sp-ai">MongoDB</span>
+            <span class="skill-pill sp-ai">TensorFlow</span>
+            <span class="skill-pill sp-ai">Keras</span>
+            <span class="skill-pill sp-tool">Angular 17</span>
+            <span class="skill-pill sp-tool">Vercel</span>
+            <span class="skill-pill sp-tool">Git</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="window focused" id="win-identity" style="width:520px;height:460px;top:60px;left:100px;z-index:10">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-identity')">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('identity')" title="Close">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('identity')" title="Minimize">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('identity')" title="Maximize">+</button>
+        </div>
+        <div class="win-title">IDENTITY.EXE — PROCESS ACTIVE</div>
+      </div>
+      <div class="win-body">
+        <div class="identity-win">
+          <div class="id-badge">// PROFILE_LOADED</div>
+          <div class="id-name">Abhishek<br/>Choudhary</div>
+          <div class="id-role">SDE × AI ENGINEER</div>
+          <div class="id-divider"></div>
+          <div class="id-desc">I build the systems and then make them intelligent. Enterprise Java backends that scale, autonomous Python agents that think. Currently building Phoenix — a policy-driven failure diagnosis engine with human-in-the-loop approval. Previously interned at Cynapse AI, shipping 100K+ event pipelines.</div>
+          <div class="id-metrics">
+            <div class="id-metric"><div class="id-metric-val">8.76</div><div class="id-metric-label">CGPA · VIT BHOPAL</div></div>
+            <div class="id-metric"><div class="id-metric-val">500+</div><div class="id-metric-label">DSA PROBLEMS</div></div>
+            <div class="id-metric"><div class="id-metric-val">40%</div><div class="id-metric-label">LATENCY REDUCED</div></div>
+          </div>
+          <div class="id-btns">
+            <a href="#" onclick="openWindow('projects');return false;" class="id-btn id-btn-primary">VIEW PROJECTS</a>
+            <a href="https://raw.githubusercontent.com/abh1shekChoudhary/Resume/main/Abhishek_Choudhary_SDE_AIML.pdf" target="_blank" class="id-btn id-btn-outline">RESUME.PDF</a>
+            <a href="#" onclick="openWindow('contact');return false;" class="id-btn id-btn-outline">CONTACT</a>
+          </div>
+          <div class="id-available"><div class="status-dot"></div>AVAILABLE FOR ROLES · JUNE 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="win-projects" style="width:640px;height:440px;top:80px;left:160px;z-index:9;display:none">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-projects')">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('projects')">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('projects')">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('projects')">+</button>
+        </div>
+        <div class="win-title">~/PROJECTS — 6 ITEMS</div>
+      </div>
+      <div class="win-body">
+        <div class="projects-win">
+          <div class="proj-header">
+            <span style="color:var(--text-muted)">$</span>
+            <span class="proj-path">~/abhishek/projects</span>
+            <span style="color:var(--text-muted)">— 6 deployments</span>
+          </div>
+          <div class="proj-grid">
+            <div class="proj-file" ondblclick="openProjectDetail('phoenix')">
+              <div class="proj-file-icon">🔥</div>
+              <div class="proj-file-name">phoenix</div>
+              <div class="proj-file-type">AI SYSTEMS</div>
+              <div class="proj-file-tag tag-ai">Python · AI Agents</div>
+              <div class="proj-file-tag tag-dev" style="margin-top:3px">IN DEV</div>
+            </div>
+            <div class="proj-file" ondblclick="openProjectDetail('screener')">
+              <div class="proj-file-icon">📋</div>
+              <div class="proj-file-name">smart-screener</div>
+              <div class="proj-file-type">RECRUITMENT AI</div>
+              <div class="proj-file-tag tag-sde">Java · Gemini API</div>
+            </div>
+            <div class="proj-file" ondblclick="openProjectDetail('mancala')">
+              <div class="proj-file-icon">🎮</div>
+              <div class="proj-file-name">mancala-game</div>
+              <div class="proj-file-type">GAME ENGINE</div>
+              <div class="proj-file-tag tag-sde">WebSocket · AWS EC2</div>
+              <div class="live-badge"><div class="live-badge-dot"></div>LIVE · mancala-game.me</div>
+            </div>
+            <div class="proj-file" ondblclick="openProjectDetail('mess')">
+              <div class="proj-file-icon">🏢</div>
+              <div class="proj-file-name">mess-mgmt</div>
+              <div class="proj-file-type">FULL-STACK PLATFORM</div>
+              <div class="proj-file-tag tag-sde">Spring Security · Docker</div>
+              <div class="live-badge"><div class="live-badge-dot"></div>LIVE · vercel + render</div>
+            </div>
+            <div class="proj-file" ondblclick="openProjectDetail('sales')">
+              <div class="proj-file-icon">🤖</div>
+              <div class="proj-file-name">sales-agent</div>
+              <div class="proj-file-type">AGENTIC AI</div>
+              <div class="proj-file-tag tag-ai">Gemini · Pinecone · MongoDB</div>
+            </div>
+            <div class="proj-file" ondblclick="openProjectDetail('gmail')">
+              <div class="proj-file-icon">📧</div>
+              <div class="proj-file-name">gmail-agent</div>
+              <div class="proj-file-type">AUTOMATION AGENT</div>
+              <div class="proj-file-tag tag-ai">Gmail API · Gemini</div>
+            </div>
+          </div>
+          <div style="padding:10px 14px;font-size:0.58rem;color:var(--text-muted);border-top:1px solid var(--border)">
+            Double-click any file to open · Drag windows to reposition
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section id="skills" class="py-24 px-6 section relative bg-gray-900/30 border-y border-gray-800/50">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col items-center mb-16">
-        <div class="inline-block mb-3 px-3 py-1 border border-orange-500/30 bg-orange-500/10 text-orange-400 font-mono text-xs tracking-wider mech-cut">
-          ARCHITECTURE_STACK
+    <div class="window" id="win-projdetail" style="width:560px;height:480px;top:100px;left:200px;z-index:11;display:none">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-projdetail')">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('projdetail')">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('projdetail')">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('projdetail')">+</button>
         </div>
-        <h2 class="text-4xl md:text-5xl font-bold font-display text-white text-center">
-          Engineering <span class="gradient-title">Capabilities</span>
-        </h2>
+        <div class="win-title" id="projdetail-title">PROJECT DETAILS</div>
       </div>
+      <div class="win-body" id="projdetail-body"></div>
+    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr">
-        <div class="bento-card mech-cut md:col-span-2 flex flex-col justify-between group p-8">
-          <div class="bento-glow bg-orange-500/20"></div>
-          <div class="card-content">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 group-hover:border-orange-500/50 transition-colors">
-                <i data-lucide="server" class="w-6 h-6 text-orange-400"></i>
+    <div class="window" id="win-skills" style="width:580px;height:420px;top:90px;left:180px;z-index:8;display:none">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-skills')">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('skills')">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('skills')">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('skills')">+</button>
+        </div>
+        <div class="win-title">SKILLS.SYS — ARCHITECTURE STACK</div>
+      </div>
+      <div class="win-body">
+        <div class="skills-win">
+          <div class="skills-grid">
+            <div class="skill-group">
+              <div class="skill-group-title">// BACKEND &amp; SYSTEMS</div>
+              <div class="skill-bar"><div class="skill-name">Java / Spring Boot <span>91%</span></div><div class="skill-track"><div class="skill-fill purple" data-w="91"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">Spring WebSocket <span>82%</span></div><div class="skill-track"><div class="skill-fill purple" data-w="82"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">REST API Design <span>88%</span></div><div class="skill-track"><div class="skill-fill purple" data-w="88"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">MySQL / JPA <span>80%</span></div><div class="skill-track"><div class="skill-fill purple" data-w="80"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">C++ <span>72%</span></div><div class="skill-track"><div class="skill-fill purple" data-w="72"></div></div></div>
+              <div class="skill-chips">
+                <span class="skill-chip">Angular 17</span><span class="skill-chip">Thymeleaf</span><span class="skill-chip">Docker</span><span class="skill-chip">AWS</span>
               </div>
-              <h3 class="text-2xl font-bold text-white font-display">Enterprise Backend & Full-Stack</h3>
             </div>
-            <p class="text-gray-400 leading-relaxed mb-6 max-w-lg">
-              Architecting scalable RESTful APIs and real-time communication systems. Proficient in layered architectures, distributed state management, and modern frontend integration.
-            </p>
-            <div class="flex flex-wrap gap-2 mt-auto">
-              <span class="base-tag tag-orange">Java</span><span class="base-tag tag-orange">C++</span><span class="base-tag tag-orange">Spring Boot</span><span class="base-tag tag-orange">Angular</span><span class="base-tag tag-orange">Thymeleaf</span><span class="base-tag tag-orange">WebSockets</span><span class="base-tag tag-orange">SQL</span><span class="base-tag tag-orange">MySQL</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bento-card mech-cut md:col-span-1 md:row-span-2 flex flex-col group p-8">
-          <div class="bento-glow bg-blue-500/20"></div>
-          <div class="card-content">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 group-hover:border-blue-500/50 transition-colors">
-                <i data-lucide="brain-circuit" class="w-6 h-6 text-blue-400"></i>
+            <div class="skill-group">
+              <div class="skill-group-title">// AI / ML ENGINEERING</div>
+              <div class="skill-bar"><div class="skill-name">Python <span>87%</span></div><div class="skill-track"><div class="skill-fill blue" data-w="87"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">Gemini / OpenAI API <span>85%</span></div><div class="skill-track"><div class="skill-fill blue" data-w="85"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">Agentic Systems <span>83%</span></div><div class="skill-track"><div class="skill-fill blue" data-w="83"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">TensorFlow / Keras <span>74%</span></div><div class="skill-track"><div class="skill-fill blue" data-w="74"></div></div></div>
+              <div class="skill-bar"><div class="skill-name">ETL Pipelines <span>78%</span></div><div class="skill-track"><div class="skill-fill blue" data-w="78"></div></div></div>
+              <div class="skill-chips">
+                <span class="skill-chip">LLM</span><span class="skill-chip">Pinecone</span><span class="skill-chip">Scikit-learn</span><span class="skill-chip">Asyncio</span>
               </div>
-              <h3 class="text-2xl font-bold text-white font-display">Agentic AI & ML</h3>
-            </div>
-            <p class="text-gray-400 text-sm leading-relaxed mb-6">
-              Engineering self-governing LLM workflows, automated diagnostic agents, and predictive data pipelines. Moving beyond brittle scripts to resilient orchestration.
-            </p>
-            <div class="flex flex-col gap-3 mt-auto">
-              <span class="base-tag tag-blue text-center w-full">Python</span>
-              <span class="base-tag tag-blue text-center w-full">LangChain</span>
-              <span class="base-tag tag-blue text-center w-full">OpenAI / Gemini API</span>
-              <span class="base-tag tag-blue text-center w-full">TensorFlow</span>
-              <span class="base-tag tag-blue text-center w-full">Keras</span>
-              <span class="base-tag tag-blue text-center w-full">Scikit-learn</span>
             </div>
           </div>
-        </div>
-
-        <div class="bento-card mech-cut md:col-span-1 flex flex-col justify-between group p-6">
-          <div class="bento-glow bg-gray-500/20"></div>
-          <div class="card-content">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700"><i data-lucide="cloud-cog" class="w-5 h-5 text-gray-400"></i></div>
-              <h3 class="text-lg font-bold text-white font-display">Cloud & DevOps</h3>
-            </div>
-            <p class="text-gray-400 text-sm mb-4">Containerizing applications and managing robust cloud deployment pipelines.</p>
-            <div class="flex flex-wrap gap-2 mt-auto">
-              <span class="base-tag">AWS</span><span class="base-tag">Docker</span><span class="base-tag">Render</span><span class="base-tag">Vercel</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bento-card mech-cut md:col-span-1 flex flex-col justify-between group p-6">
-          <div class="bento-glow bg-gray-500/20"></div>
-          <div class="card-content">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="bg-gray-800 p-3 rounded-xl border border-gray-700"><i data-lucide="terminal-square" class="w-5 h-5 text-gray-400"></i></div>
-              <h3 class="text-lg font-bold text-white font-display">Core Tooling</h3>
-            </div>
-            <p class="text-gray-400 text-sm mb-4">500+ algorithmic problems solved. Disciplined in version control and API testing.</p>
-            <div class="flex flex-wrap gap-2 mt-auto">
-              <span class="base-tag">Git / GitHub</span><span class="base-tag">Postman</span><span class="base-tag">IntelliJ IDEA</span><span class="base-tag">VS Code</span><span class="base-tag">Colab</span>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+            <div class="skill-group-title" style="margin-bottom:8px">// CORE TOOLING</div>
+            <div class="skill-chips">
+              <span class="skill-chip">Git / GitHub</span><span class="skill-chip">Postman</span><span class="skill-chip">IntelliJ IDEA</span><span class="skill-chip">VS Code</span><span class="skill-chip">Google Colab</span><span class="skill-chip">Render</span><span class="skill-chip">Vercel</span><span class="skill-chip">SerpApi</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section id="experience" class="py-24 px-6 section">
-    <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-bold font-display gradient-title mb-12 text-center">Industry Experience</h2>
-        <div class="project-card mech-cut p-8 relative overflow-hidden group">
-            <div class="absolute top-0 right-0 p-8 opacity-5 transform translate-x-4 -translate-y-4 group-hover:scale-110 transition-transform duration-500">
-                <i data-lucide="briefcase" class="w-32 h-32 text-orange-500"></i>
-            </div>
-            <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-2 relative z-10">
-                <div>
-                    <h3 class="text-2xl font-bold text-white">AI/ML Intern</h3>
-                    <a href="https://www.cynapseai.com/" target="_blank" class="text-lg text-orange-400 font-semibold mt-1 hover:text-orange-300 transition-colors inline-flex items-center gap-2">
-                        Cynapse AI <i data-lucide="external-link" class="w-4 h-4"></i>
-                    </a>
-                </div>
-                <div class="font-mono text-sm text-gray-400 border border-gray-700 bg-gray-800 px-3 py-1 mech-cut">Oct 2025 - Present</div>
-            </div>
-            <div class="space-y-4 text-gray-300 leading-relaxed mb-8 relative z-10">
-                <p class="font-medium text-gray-200">Collaborating in an Agile environment to architect scalable data solutions and intelligent agents.</p>
-                <ul class="list-none space-y-3 text-gray-400">
-                    <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-orange-500 mr-2 shrink-0 mt-0.5"></i> <span>Defined a roadmap for a <strong class="text-white">Gen AI agent</strong>, projected to automate workflows across 15+ enterprise applications.</span></li>
-                    <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-orange-500 mr-2 shrink-0 mt-0.5"></i> <span>Engineered scalable data pipelines processing <strong class="text-white">100,000+ daily events</strong> from multiple API endpoints.</span></li>
-                    <li class="flex items-start"><i data-lucide="chevron-right" class="w-5 h-5 text-orange-500 mr-2 shrink-0 mt-0.5"></i> <span>Optimized ETL pipelines to reduce data latency by <strong class="text-white">40%</strong>.</span></li>
-                </ul>
-            </div>
-            <div class="flex flex-wrap gap-2 relative z-10">
-                <span class="base-tag tag-blue">Generative AI</span><span class="base-tag tag-blue">ETL Pipelines</span><span class="base-tag tag-blue">Data Analytics</span>
-            </div>
+    <div class="window" id="win-experience" style="width:520px;height:400px;top:100px;left:190px;z-index:7;display:none">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-experience')">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('experience')">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('experience')">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('experience')">+</button>
         </div>
-    </div>
-  </section>
-
-  <section id="flagship" class="py-24 px-6 section">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold font-display gradient-title mb-6">Flagship Architecture</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto text-lg">
-                My two most complex builds, representing the absolute peak of my capabilities in Autonomous AI and Enterprise Software.
-            </p>
-        </div>
-
-        <div class="flex flex-col gap-12">
-            
-            <div class="project-card mech-cut p-8 md:p-12">
-                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1600&q=80')]"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/40 z-0"></div>
-                
-                <div class="card-content grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
-                    <div class="lg:col-span-3">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i data-lucide="brain-circuit" class="text-blue-500 w-6 h-6"></i>
-                            <span class="font-mono text-sm tracking-widest text-blue-400">FLAGSHIP_AI</span>
-                            <span class="ml-4 font-mono text-xs tracking-widest text-yellow-400 border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 mech-cut flex items-center">
-                                <span class="w-2 h-2 rounded-full bg-yellow-400 mr-2 animate-pulse"></span> IN_DEV
-                            </span>
-                        </div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Phoenix: Resilient Automation</h3>
-                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
-                            A high-performance Python framework designed to bridge the gap between brittle script execution and intelligent task orchestration. Utilizes LLMs for semantic error diagnosis to create self-healing automation workflows.
-                        </p>
-                        <ul class="space-y-3 text-gray-400 text-sm mb-8">
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 shrink-0"></i> Developing a high-concurrency task orchestration system utilizing Asyncio.</li>
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-blue-500 mr-2 shrink-0"></i> Designing custom "Rebirth" logic enabling processes to dynamically re-architect paths after failure contexts are generated.</li>
-                        </ul>
-                        <div class="flex flex-wrap gap-2 mb-8">
-                            <span class="base-tag tag-blue">Python (Asyncio)</span><span class="base-tag tag-blue">LangChain</span><span class="base-tag tag-blue">Pydantic</span><span class="base-tag tag-blue">OpenAI API</span><span class="base-tag tag-blue">SQLite</span>
-                        </div>
-                        <a href="https://github.com/abh1shekChoudhary/Phoenix" target="_blank" class="btn btn-outline border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white mech-cut text-sm">
-                            <i data-lucide="github"></i> View Framework Core
-                        </a>
-                    </div>
-                    
-                    <div class="lg:col-span-2 hidden lg:block bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 p-6 mech-cut shadow-xl">
-                        <h4 class="text-gray-200 font-mono text-sm mb-4 border-b border-gray-700 pb-2">Execution Pipeline:</h4>
-                        <div class="space-y-4 font-mono text-xs text-gray-400">
-                            <div class="flex items-center"><i data-lucide="play-circle" class="w-4 h-4 text-blue-400 mr-3"></i> 1. Async Task Initiation</div>
-                            <div class="flex items-center"><i data-lucide="alert-triangle" class="w-4 h-4 text-red-400 mr-3"></i> 2. Exception Intercepted</div>
-                            <div class="flex items-center"><i data-lucide="cpu" class="w-4 h-4 text-purple-400 mr-3"></i> 3. LLM Semantic Diagnosis</div>
-                            <div class="flex items-center"><i data-lucide="refresh-cw" class="w-4 h-4 text-green-400 mr-3"></i> 4. State Recovery & Rebirth</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card mech-cut p-8 md:p-12">
-                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80')]"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/40 z-0"></div>
-                
-                <div class="card-content grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
-                    <div class="lg:col-span-3">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i data-lucide="server" class="text-orange-500 w-6 h-6"></i>
-                            <span class="font-mono text-sm tracking-widest text-orange-400">FLAGSHIP_SDE</span>
-                        </div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Smart Resume Screener</h3>
-                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
-                            Architected a full-stack Spring Boot enterprise recruitment platform designed to automate high-volume hiring pipelines. Moved beyond rigid ATS keyword constraints by integrating the Google Gemini API for semantic document analysis.
-                        </p>
-                        <ul class="space-y-3 text-gray-400 text-sm mb-8">
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-orange-500 mr-2 shrink-0"></i> Developed a multi-format document parsing engine utilizing Apache PDFBox for extraction.</li>
-                            <li class="flex items-start"><i data-lucide="check" class="w-5 h-5 text-orange-500 mr-2 shrink-0"></i> Engineered RESTful APIs and optimized a MySQL schema utilizing Spring Data JPA for complex CRUD operations.</li>
-                        </ul>
-                        <div class="flex flex-wrap gap-2 mb-8">
-                            <span class="base-tag tag-orange">Java 17</span><span class="base-tag tag-orange">Spring Boot</span><span class="base-tag tag-orange">Gemini API</span><span class="base-tag tag-orange">Apache PDFBox</span><span class="base-tag tag-orange">MySQL</span>
-                        </div>
-                        <a href="https://github.com/abh1shekChoudhary/Smart-Resume-Screener" target="_blank" class="btn btn-primary mech-cut text-sm">
-                            <i data-lucide="github"></i> Inspect Architecture
-                        </a>
-                    </div>
-                    
-                    <div class="lg:col-span-2 hidden lg:block bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 p-6 mech-cut shadow-xl">
-                        <h4 class="text-gray-200 font-mono text-sm mb-4 border-b border-gray-700 pb-2">Architecture Flow:</h4>
-                        <div class="space-y-4 font-mono text-xs text-gray-400">
-                            <div class="flex items-center"><i data-lucide="file-text" class="w-4 h-4 text-orange-400 mr-3"></i> PDFBox Parsing (Doc/Txt)</div>
-                            <div class="flex items-center"><i data-lucide="database" class="w-4 h-4 text-blue-400 mr-3"></i> Spring Data JPA Storage</div>
-                            <div class="flex items-center"><i data-lucide="zap" class="w-4 h-4 text-purple-400 mr-3"></i> Gemini LLM Scoring Logic</div>
-                            <div class="flex items-center"><i data-lucide="layout" class="w-4 h-4 text-green-400 mr-3"></i> Thymeleaf Dashboard Render</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-  </section>
-
-  <section id="projects" class="py-24 px-6 section bg-gray-900/30 border-y border-gray-800/50">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold font-display text-white mb-6">Additional Deployments</h2>
-            <p class="text-gray-400 max-w-2xl mx-auto mb-8">
-                Filter by domain to explore the rest of my production-ready applications, ranging from distributed game engines to multi-agent LLM logic pipelines.
-            </p>
-            
-            <div class="inline-flex bg-gray-800 p-1 rounded-none mech-cut border border-gray-700">
-                <button id="toggle-sde" onclick="showDomain('sde')" class="btn btn-outline border-none mech-cut toggle-active-sde px-6 py-2 transition-all">
-                    <i data-lucide="server" class="w-4 h-4 mr-2"></i> Core Software Eng.
-                </button>
-                <button id="toggle-ai" onclick="showDomain('ai')" class="btn btn-outline border-none mech-cut px-6 py-2 transition-all">
-                    <i data-lucide="brain-circuit" class="w-4 h-4 mr-2"></i> Applied AI & ML
-                </button>
-            </div>
-        </div>
-
-        <div id="sde-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-enter-active">
-            
-            <div class="project-card mech-cut p-8 flex flex-col justify-between">
-                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=800&q=80')]"></div>
-                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
-                <div class="card-content">
-                    <h3 class="text-2xl font-bold text-white mb-2">Real-Time Networked Mancala</h3>
-                    <p class="text-orange-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Distributed Game Engine & Stateful WebSockets</p>
-                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Architected a custom Java game engine to govern complex state transitions, turn-based validation, and strict win-condition logic.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Engineered low-latency bidirectional multiplayer synchronization utilizing Spring WebSocket, STOMP, and SockJS protocols.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Integrated a custom heuristic-based AI opponent utilizing Minimax with alpha-beta pruning for dynamic single-player difficulty scaling.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                        <span class="base-tag">Java</span><span class="base-tag">Spring Boot</span><span class="base-tag">Spring WebSocket</span><span class="base-tag">STOMP</span><span class="base-tag">SockJS</span>
-                    </div>
-                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
-                        <a href="https://github.com/abh1shekChoudhary/MancalaGame" target="_blank" class="text-sm font-mono text-gray-400 hover:text-orange-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>Inspect Engine Code</a>
-                        <a href="https://mancala-game.me/" target="_blank" class="text-sm font-mono text-orange-400 hover:text-white transition-colors"><i data-lucide="external-link" class="w-4 h-4 inline mr-2"></i>Launch Server Demo</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card mech-cut p-8 flex flex-col justify-between">
-                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80')]"></div>
-                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
-                <div class="card-content">
-                    <h3 class="text-2xl font-bold text-white mb-2">Enterprise Mess Management</h3>
-                    <p class="text-orange-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Full-Stack Microservices & Reactive UI</p>
-                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Developed a scalable Spring Boot REST API backed by Spring Data JPA to automate institutional billing and high-concurrency attendance tracking.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Built a highly responsive frontend utilizing Angular 17's modern Standalone Components, Signals, and RxJS for reactive state management.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-orange-500 mr-2 shrink-0 mt-0.5"></i> Containerized the backend architecture with Docker to eliminate environment disparities and deployed the client securely via Vercel.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                        <span class="base-tag">Spring Boot</span><span class="base-tag">Angular 17</span><span class="base-tag">Spring Data JPA</span><span class="base-tag">RxJS</span><span class="base-tag">Docker</span><span class="base-tag">Vercel</span>
-                    </div>
-                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
-                        <a href="https://github.com/abh1shekChoudhary/MessApplication" target="_blank" class="text-sm font-mono text-gray-400 hover:text-orange-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>Backend Core API</a>
-                        <a href="https://mess-application-front-end-angular.vercel.app/login" target="_blank" class="text-sm font-mono text-orange-400 hover:text-white transition-colors"><i data-lucide="external-link" class="w-4 h-4 inline mr-2"></i>Client Interface Demo</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div id="ai-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 hidden">
-
-            <div class="project-card mech-cut p-8 flex flex-col justify-between">
-                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80')]"></div>
-                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
-                <div class="card-content">
-                    <h3 class="text-2xl font-bold text-white mb-2">Autonomous Sales Agent</h3>
-                    <p class="text-blue-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Multi-Agent Orchestration & RAG</p>
-                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Engineered a multi-agent orchestration layer using CrewAI to automate end-to-end B2B sales research and personalized outreach.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Integrated real-time web search capabilities via SerpApi to dynamically ground AI pitches in current prospect news and financial data.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Designed a highly accurate RAG pipeline utilizing Pinecone and Gemini LLM to enforce strict company brand communication guidelines.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                        <span class="base-tag">CrewAI</span><span class="base-tag">Pinecone</span><span class="base-tag">Gemini LLM</span><span class="base-tag">SerpApi</span>
-                    </div>
-                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
-                        <a href="https://github.com/abh1shekChoudhary/sales_agentic_ai" target="_blank" class="text-sm font-mono text-gray-400 hover:text-blue-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>View Agent Logic</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card mech-cut p-8 flex flex-col justify-between">
-                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1596526131083-e8c633c948d2?auto=format&fit=crop&w=600&q=80')]"></div>
-                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
-                <div class="card-content">
-                    <h3 class="text-2xl font-bold text-white mb-2">Stateless Gmail Agent</h3>
-                    <p class="text-blue-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">OpenAI Agent & API Automation</p>
-                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Built a Python-based autonomous agent interfacing directly with the Google Workspace to fully automate email triage and response drafting.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Architected a stateless workflow that leverages the OpenAI Agent framework to perform complex reasoning without requiring persistent database storage, ensuring high privacy and speed.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Managed secure authentication utilizing OAuth 2.0 to access protected mailbox endpoints.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                        <span class="base-tag">OpenAI Agent</span><span class="base-tag">Gmail API</span><span class="base-tag">OAuth 2.0</span><span class="base-tag">Python</span>
-                    </div>
-                    <div class="pt-6 border-t border-gray-800 flex justify-between items-center mt-auto">
-                        <a href="https://github.com/abh1shekChoudhary/Gmail_Agent" target="_blank" class="text-sm font-mono text-gray-400 hover:text-blue-400 transition-colors"><i data-lucide="github" class="w-4 h-4 inline mr-2"></i>View Execution Script</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card mech-cut p-8 flex flex-col md:flex-row justify-between md:col-span-2">
-                <div class="card-backdrop bg-[url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80')]"></div>
-                <div class="absolute inset-0 bg-gray-900/85 z-0"></div>
-                <div class="card-content w-full md:w-3/4">
-                    <h3 class="text-2xl font-bold text-white mb-2">Food Prep Forecaster</h3>
-                    <p class="text-blue-400 text-sm font-mono mb-6 pb-4 border-b border-gray-700">Deep Learning & Predictive Analytics</p>
-                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-                        Designed to combat institutional food waste by accurately forecasting meal consumption demand. Architected a predictive data pipeline capable of generating complex synthetic datasets to train a highly optimized Neural Network. 
-                    </p>
-                    <ul class="space-y-3 text-gray-400 text-sm mb-8 leading-relaxed">
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Utilized TensorFlow and Keras to build models achieving R² scores between 0.85 and 0.94.</li>
-                        <li class="flex items-start"><i data-lucide="chevron-right" class="w-4 h-4 text-blue-500 mr-2 shrink-0 mt-0.5"></i> Optimized the network with early stopping and hyperparameter tuning using Scikit-learn, projecting an estimated 25% reduction in inventory waste.</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                        <span class="base-tag">TensorFlow</span><span class="base-tag">Keras</span><span class="base-tag">Scikit-learn</span><span class="base-tag">Python</span>
-                    </div>
-                    <div class="pt-6 border-t border-gray-800 flex justify-start items-center mt-auto">
-                        <a href="https://colab.research.google.com/drive/1YYbQMDB1b7_wNEX4wKxrLNr41MS5Mqb4?usp=sharing" target="_blank" class="text-sm font-mono text-blue-400 hover:text-white transition-colors"><i data-lucide="book-open" class="w-4 h-4 inline mr-2"></i>Inspect Colab Model Notebook</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-  </section>
-
-  <section id="contact" class="py-24 px-6 section">
-    <div class="max-w-4xl mx-auto text-center">
-      <div class="inline-block mb-4 px-3 py-1 border border-orange-500/30 bg-orange-500/10 text-orange-400 font-mono text-xs tracking-wider mech-cut">
-        SYSTEM.SHUTDOWN_HOOK
+        <div class="win-title">EXP.LOG — INDUSTRY EXPERIENCE</div>
       </div>
-      <h2 class="text-4xl font-bold font-display gradient-title mb-6">Establish Connection</h2>
-      <p class="text-gray-400 mb-10 text-lg font-mono">
-        > Awaiting new challenges. Ready to scale systems and intelligent agents.<br>
-        > Status: Available for engineering roles starting June 2026.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-8 justify-center items-center">
-        <a href="mailto:abhi1312choudhary@gmail.com" class="header-link text-lg flex items-center"><i data-lucide="mail" class="mr-2 w-5 h-5"></i>abhi1312choudhary@gmail.com</a>
-        <a href="https://github.com/abh1shekChoudhary" target="_blank" class="header-link text-lg flex items-center"><i data-lucide="github" class="mr-2 w-5 h-5"></i>GitHub Platform</a>
-        <a href="https://linkedin.com/in/abhishek-choudhary-991634251/" target="_blank" class="header-link text-lg flex items-center"><i data-lucide="linkedin" class="mr-2 w-5 h-5"></i>Professional Network</a>
+      <div class="win-body">
+        <div class="exp-win">
+          <div class="exp-header-tag">// CURRENT ROLE</div>
+          <div class="exp-company"><a href="https://www.cynapseai.com/" target="_blank">Cynapse AI</a></div>
+          <div class="exp-role">AI / ML INTERN</div>
+          <div class="exp-date">OCT 2025 — FEB 2026</div>
+          <div class="exp-tagline">Collaborated in an Agile team to architect scalable data solutions and define the roadmap for intelligent enterprise AI agents.</div>
+          <div class="exp-bullets">
+            <div class="exp-bullet"><span class="exp-bullet-arrow">›</span><span>Defined a 3-quarter product roadmap for a Gen AI agent projected to boost user productivity by <strong style="color:#fff">20–30%</strong> by automating workflows across <strong style="color:#fff">15+ enterprise applications</strong>.</span></div>
+            <div class="exp-bullet"><span class="exp-bullet-arrow">›</span><span>Contributed to scalable data pipelines processing <strong style="color:#fff">100,000+ daily events</strong> from <strong style="color:#fff">10+ APIs</strong>, fueling a real-time analytics dashboard.</span></div>
+            <div class="exp-bullet"><span class="exp-bullet-arrow">›</span><span>Reduced data latency by <strong style="color:#fff">40%</strong> via optimized ETL pipeline architecture.</span></div>
+          </div>
+          <div class="exp-stack">
+            <span class="exp-tag">Generative AI</span>
+            <span class="exp-tag">ETL Pipelines</span>
+            <span class="exp-tag">Data Analytics</span>
+            <span class="exp-tag">Agile / Scrum</span>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <footer class="py-8 px-6 text-center text-gray-600 font-mono text-xs border-t border-gray-800">
-    <p>Compiled & Shipped by Abhishek Choudhary // 2026</p>
-  </footer>
+    <div class="window" id="win-terminal" style="width:560px;height:360px;top:120px;left:220px;z-index:6;display:none;background:#000">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-terminal')" style="background:#111">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('terminal')">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('terminal')">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('terminal')">+</button>
+        </div>
+        <div class="win-title" style="color:#555">TERMINAL — abhic@ac-os:~</div>
+      </div>
+      <div class="win-body" id="terminal-body">
+        <div class="terminal-win" id="terminal-content-win"></div>
+      </div>
+    </div>
 
-  <script>
-    lucide.createIcons();
+    <div class="window" id="win-readme" style="width:500px;height:420px;top:90px;left:170px;z-index:5;display:none">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-readme')">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('readme')">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('readme')">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('readme')">+</button>
+        </div>
+        <div class="win-title">README.MD</div>
+      </div>
+      <div class="win-body">
+        <div class="readme-win">
+          <div class="readme-h1">// ABOUT THIS ENGINEER</div>
+          <div class="readme-name">Abhishek Choudhary</div>
+          <div class="readme-p">Final-year CS (AI-ML) student at VIT Bhopal, based in Gurugram, India. I work at the intersection of enterprise Java backend engineering and autonomous AI systems — building the infrastructure that makes AI production-ready.</div>
+          <div class="readme-p">My flagship project Phoenix is a policy-driven failure diagnosis and remediation engine. It intercepts runtime exceptions, runs a 5-stage pipeline (Classify → Decide → Mutate → Validate → Human Approval), and stages fixes for human approval. AI suggests. Humans deploy. Always.</div>
+          <div class="readme-section">// EDUCATION</div>
+          <div class="readme-edu">
+            <div class="edu-degree">B.Tech — Computer Science &amp; Engineering (AI-ML)</div>
+            <div class="edu-school">VIT Bhopal University</div>
+            <div class="edu-year">2022 — 2026 · CGPA: 8.76</div>
+          </div>
+          <div class="readme-section">// PHILOSOPHY</div>
+          <div class="readme-p" style="font-size:0.68rem;border-left:2px solid var(--purple);padding-left:12px;color:var(--text-muted)">"Classification before action. Decision before mutation. Human authority over AI. Context is discovered, not assumed."</div>
+          <div class="readme-section">// STATUS</div>
+          <div style="font-size:0.65rem;color:var(--green-dim);display:flex;align-items:center;gap:8px">
+            <div class="status-dot"></div>
+            Available for SDE / AI Engineer roles · June 2026 · Gurugram, India
+          </div>
+        </div>
+      </div>
+    </div>
 
-    function showDomain(domain) {
-        const sdeBtn = document.getElementById('toggle-sde');
-        const aiBtn = document.getElementById('toggle-ai');
-        const sdeGrid = document.getElementById('sde-grid');
-        const aiGrid = document.getElementById('ai-grid');
+    <div class="window" id="win-contact" style="width:420px;height:380px;top:100px;left:210px;z-index:4;display:none">
+      <div class="win-titlebar" onmousedown="startDrag(event,'win-contact')">
+        <div class="win-controls">
+          <button class="win-btn close" onclick="closeWindow('contact')">×</button>
+          <button class="win-btn min" onclick="minimizeWindow('contact')">−</button>
+          <button class="win-btn max" onclick="maximizeWindow('contact')">+</button>
+        </div>
+        <div class="win-title">CONTACT.SH — ESTABLISH CONNECTION</div>
+      </div>
+      <div class="win-body">
+        <div class="contact-win">
+          <div class="contact-title">Let's Build<br/>Something.</div>
+          <div class="contact-sub">// AVAILABLE · JUNE 2026 · OPEN TO RELOCATION</div>
+          <div class="contact-items">
+            <a href="mailto:abhi1312choudhary@gmail.com" class="contact-item">
+              <div class="ci-icon">✉</div>
+              <div><div class="ci-label">EMAIL</div><div class="ci-value">abhi1312choudhary@gmail.com</div></div>
+            </a>
+            <a href="https://github.com/abh1shekChoudhary" target="_blank" class="contact-item">
+              <div class="ci-icon">⌥</div>
+              <div><div class="ci-label">GITHUB</div><div class="ci-value">abh1shekChoudhary</div></div>
+            </a>
+            <a href="https://linkedin.com/in/abhishek-choudhary-991634251/" target="_blank" class="contact-item">
+              <div class="ci-icon">◈</div>
+              <div><div class="ci-label">LINKEDIN</div><div class="ci-value">abhishek-choudhary-991634251</div></div>
+            </a>
+            <a href="https://raw.githubusercontent.com/abh1shekChoudhary/Resume/main/Abhishek_Choudhary_SDE_AIML.pdf" target="_blank" class="contact-item">
+              <div class="ci-icon">◎</div>
+              <div><div class="ci-label">RESUME</div><div class="ci-value">Abhishek_Choudhary_SDE_AIML.pdf</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        if (domain === 'sde') {
-            sdeBtn.classList.add('toggle-active-sde');
-            aiBtn.classList.remove('toggle-active-ai');
-            
-            aiGrid.classList.remove('fade-enter-active');
-            aiGrid.classList.add('hidden');
-            
-            sdeGrid.classList.remove('hidden');
-            setTimeout(() => sdeGrid.classList.add('fade-enter-active'), 10);
-        } else {
-            aiBtn.classList.add('toggle-active-ai');
-            sdeBtn.classList.remove('toggle-active-sde');
-            
-            sdeGrid.classList.remove('fade-enter-active');
-            sdeGrid.classList.add('hidden');
-            
-            aiGrid.classList.remove('hidden');
-            setTimeout(() => aiGrid.classList.add('fade-enter-active'), 10);
-        }
-    }
+  </div><div id="taskbar">
+    <div class="tb-item active" id="tb-identity" onclick="toggleWindow('identity')">
+      <span class="tb-dot"></span>IDENTITY
+    </div>
+    <div class="tb-item" id="tb-projects" onclick="toggleWindow('projects')">PROJECTS</div>
+    <div class="tb-item" id="tb-skills" onclick="toggleWindow('skills')">SKILLS</div>
+    <div class="tb-item" id="tb-experience" onclick="toggleWindow('experience')">EXPERIENCE</div>
+    <div class="tb-item" id="tb-terminal" onclick="toggleWindow('terminal')">TERMINAL</div>
+    <div class="tb-item" id="tb-readme" onclick="toggleWindow('readme')">README</div>
+    <div class="tb-item" id="tb-contact" onclick="toggleWindow('contact')">CONTACT</div>
+    <div id="taskbar-right">
+      <div id="taskbar-available"><div class="status-dot"></div>AVAILABLE · JUN 2026</div>
+    </div>
+  </div>
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const terminalContent = document.getElementById('terminal-content');
-      const commands = [
-        { text: "> mvn spring-boot:run", delay: 700, type: 'cmd' },
-        { text: "[INFO] Starting Scalable Microservices on port 8080...", delay: 400, type: 'log' },
-        { text: "[INFO] Infrastructure robust and active. [OK]", delay: 800, type: 'success' },
-        { text: "> python main_agent.py --deploy", delay: 900, type: 'cmd' },
-        { text: "Loading LLM Engine... [OK]", delay: 300, type: 'log' },
-        { text: "Connecting autonomous workflows... [OK]", delay: 500, type: 'log' },
-        { text: "System State: Fully Integrated & Operational.", delay: 0, type: 'success' }
-      ];
+</div><div class="notif" id="notif">
+  <div class="notif-title" id="notif-title">SYSTEM</div>
+  <div id="notif-body">Message</div>
+</div>
 
-      async function typeCommand(command) {
-        return new Promise(resolve => {
-          let i = 0;
-          const typingInterval = setInterval(() => {
-            terminalContent.innerHTML += command.text.charAt(i);
-            i++;
-            if (i >= command.text.length) {
-              clearInterval(typingInterval);
-              terminalContent.innerHTML += '\n';
-              resolve();
-            }
-          }, 25);
-        });
-      }
+<div id="cmd-palette">
+  <input id="cmd-input" placeholder="Search windows, projects, commands..." autocomplete="off"/>
+  <div id="cmd-results"></div>
+</div>
 
-      async function runTerminal() {
-        for (const cmd of commands) {
-          await new Promise(r => setTimeout(r, 400));
-          
-          if (cmd.type === 'cmd') {
-            terminalContent.innerHTML += '<span class="text-orange-400"></span>'; 
-            await typeCommand(cmd);
-          } else if (cmd.type === 'success') {
-            terminalContent.innerHTML += `<span class="text-green-400">${cmd.text}</span>\n`;
-          } else {
-            terminalContent.innerHTML += `<span class="text-gray-500">${cmd.text}</span>\n`;
-          }
-          await new Promise(r => setTimeout(r, cmd.delay));
-        }
-      }
-      runTerminal();
+<div id="ctx-menu">
+  <div class="ctx-item" onclick="openWindow('identity')">👤 Open Identity</div>
+  <div class="ctx-item" onclick="openWindow('projects')">📁 Open Projects</div>
+  <div class="ctx-item" onclick="openWindow('terminal')">⬛ Open Terminal</div>
+  <div class="ctx-separator"></div>
+  <div class="ctx-item" onclick="openWindow('readme')">📄 View README</div>
+  <div class="ctx-item" onclick="openWindow('contact')">📡 Contact</div>
+  <div class="ctx-separator"></div>
+  <div class="ctx-item" onclick="toggleCmdPalette()">⌘ Command Palette</div>
+</div>
+
+<script>
+// ─── PROJECT DATA ───
+const projects = {
+  phoenix: {
+    title: 'Phoenix',
+    subtitle: 'POLICY-DRIVEN FAILURE DIAGNOSIS & REMEDIATION ENGINE',
+    tag: 'FLAGSHIP · AI SYSTEMS', tagClass: 'tag-ai',
+    desc: 'Phoenix v2 is a policy-driven, environment-aware, autonomous failure diagnosis and remediation system. NOT a code-fixing bot — a controlled reliability system that diagnoses, isolates, and remediates software failures while keeping human authority at the center of every merge and deploy.',
+    bullets: [
+      '5-stage remediation pipeline: Classify → Decide → Mutate → Validate → Human Approval. Strict separation between AI-generated fixes and merges.',
+      'Environment-aware context discovery engine that maps system topology at runtime — replacing fragile hardcoded assumptions with dynamic introspection.',
+      'Human-in-the-loop approval gate: fixes are staged and presented for human review, never deployed automatically. AI suggests, engineers approve.'
+    ],
+    stack: ['Python', 'AI Agents', 'Event-Driven Architecture'],
+    github: 'https://github.com/abh1shekChoudhary/Phoenix',
+    demo: null,
+    color: '#3b82f6'
+  },
+  screener: {
+    title: 'Smart Resume Screener',
+    subtitle: 'AI-POWERED RECRUITMENT AUTOMATION PLATFORM',
+    tag: 'FLAGSHIP · SDE', tagClass: 'tag-sde',
+    desc: 'A robust backend application automating the initial stages of technical recruitment. Parses candidate resumes (PDF or TXT), uses Google Gemini LLM to score them against a job description, and returns a ranked shortlist with detailed AI-generated justifications and matched skills.',
+    bullets: [
+      'Multi-format resume parsing via Apache PDFBox — PDF and plain text (.txt) files supported.',
+      'Gemini API prompt engineering: role prompting, structured JSON output (score 1–10, justification, skills array), strict safety settings.',
+      'Full CRUD REST API (8 endpoints) for jobs and resumes. Interactive Thymeleaf dashboard for ranked shortlist review.'
+    ],
+    stack: ['Java 17', 'Spring Boot', 'Google Gemini API', 'Apache PDFBox', 'MySQL', 'Spring Data JPA', 'Thymeleaf', 'Lombok'],
+    github: 'https://github.com/abh1shekChoudhary/Smart-Resume-Screener',
+    demo: null,
+    color: '#f97316'
+  },
+  mancala: {
+    title: 'Mancala Game',
+    subtitle: 'REAL-TIME NETWORKED GAME · AWS EC2 DEPLOYED',
+    tag: 'SDE', tagClass: 'tag-sde',
+    desc: 'Production-deployed full-stack real-time web application with 3 game modes and sub-100ms state synchronization via Spring Boot WebSockets (STOMP protocol). Live multiplayer sessions served over AWS EC2 with SSL/TLS enforced.',
+    bullets: [
+      'Real-time multiplayer via Spring WebSocket + STOMP. Sub-100ms state sync across concurrent connections.',
+      'Heuristic-driven AI opponent with 3 adaptive difficulty tiers using game-tree evaluation — built without hardcoded strategies.',
+      'Provisioned on AWS EC2: VPC Network Security Groups, Caddy reverse proxy, SSL/TLS (HTTPS) for secure traffic handling.'
+    ],
+    stack: ['Java 17', 'Spring Boot 3.2.5', 'Spring WebSocket', 'STOMP', 'Thymeleaf', 'Docker', 'AWS EC2'],
+    github: 'https://github.com/abh1shekChoudhary/MancalaGame',
+    demo: 'https://mancala-game.me/',
+    deployUrl: 'https://mancala-game.me/',
+    deployLabel: 'mancala-game.me',
+    deployHost: 'AWS EC2 · Caddy · SSL/TLS',
+    color: '#f97316'
+  },
+  mess: {
+    title: 'Mess Management System',
+    subtitle: 'FULL-STACK INSTITUTIONAL PLATFORM · 6,000+ STUDENTS',
+    tag: 'SDE', tagClass: 'tag-sde',
+    desc: 'Production-ready institutional platform serving 6,000+ students on a clean 3-tier MVC architecture. Spring Boot backend with Spring Security RBAC, Angular SPA frontend, containerized with Docker + Docker Compose for one-command orchestration.',
+    bullets: [
+      '10+ RESTful APIs with role-based access control (RBAC) — differentiated permissions between student and administrator roles.',
+      'Angular 17 SPA frontend in a separate repo (MessApplication-FrontEnd-Angular-17). Spring Boot 3.3.1 + Spring Security + Spring Data JPA backend.',
+      'Containerized with Docker and Docker Compose. Backend deployed to Render, frontend deployed to Vercel.'
+    ],
+    stack: ['Java 17', 'Spring Boot 3.3.1', 'Spring Security', 'Spring Data JPA', 'MySQL', 'Angular 17', 'Docker', 'Docker Compose', 'Render', 'Vercel'],
+    github: 'https://github.com/abh1shekChoudhary/MessApplication',
+    demo: 'https://mess-application-front-end-angular.vercel.app/login',
+    deployUrl: 'https://mess-application-front-end-angular.vercel.app/login',
+    deployLabel: 'mess-application.vercel.app',
+    deployHost: 'Vercel (frontend) · Render (backend)',
+    color: '#f97316'
+  },
+  sales: {
+    title: 'Sales Lead Qualification Agent',
+    subtitle: 'AUTONOMOUS AGENTIC AI · PLAN→ACT→REFLECT→IMPROVE',
+    tag: 'AI', tagClass: 'tag-ai',
+    desc: 'Fully autonomous AI agent that qualifies sales leads, decides the best outreach strategy, drafts personalized emails, and improves over time through human feedback. Implements a complete plan→act→reflect→improve agentic loop with long-term vector memory.',
+    bullets: [
+      'Long-term memory via Pinecone vector database + SentenceTransformers (local embeddings). Agent recalls past outcomes to make better future decisions.',
+      'Full observability: every action, thought, and error logged as a flight record in MongoDB via state_manager.py.',
+      'Human-in-the-loop feedback loop: run update_memory.py with an outcome (MEETING_BOOKED, NO_REPLY, etc.) to complete the learning cycle.'
+    ],
+    stack: ['Python', 'Google Gemini API', 'Pinecone', 'SentenceTransformers', 'MongoDB', 'Pydantic', 'pymongo'],
+    github: 'https://github.com/abh1shekChoudhary/sales_agentic_ai',
+    demo: null,
+    color: '#3b82f6'
+  },
+  gmail: {
+    title: 'Gmail Automation Agent',
+    subtitle: 'GMAIL API + GEMINI · PERSISTENT MEMORY',
+    tag: 'AI', tagClass: 'tag-ai',
+    desc: 'Python-based agent automating Gmail tasks: retrieves, filters, sorts, and drafts email replies. Maintains persistent memory across runs via config.json — retaining context, filters, and response templates. Supports vacation scheduling.',
+    bullets: [
+      'Automates email retrieval, filtering, sorting, and reply drafting via Gmail API. Stores drafts directly in Gmail Drafts folder.',
+      'Persistent memory via config.json retains context from previous runs, user-defined filters, and response templates.',
+      'Secure OAuth 2.0 authentication for Gmail API. Uses Gemini API for intelligent email processing and reply generation.'
+    ],
+    stack: ['Python', 'Gmail API', 'Google Gemini API', 'OAuth 2.0'],
+    github: 'https://github.com/abh1shekChoudhary/Gmail_Agent',
+    demo: null,
+    color: '#3b82f6'
+  }
+};
+
+// ─── WINDOW MANAGEMENT ───
+let zCounter = 20;
+const windowStates = {};
+
+function openWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  win.style.display = 'flex';
+  win.classList.remove('minimized');
+  focusWindow(id);
+  document.getElementById('tb-' + id)?.classList.add('active');
+  if (id === 'skills') animateSkillBars();
+  if (id === 'terminal') initTerminalWindow();
+  showNotif(id.toUpperCase() + '.EXE', 'Process started successfully');
+}
+
+function closeWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  win.style.display = 'none';
+  document.getElementById('tb-' + id)?.classList.remove('active');
+}
+
+function minimizeWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  win.style.display = 'none';
+  document.getElementById('tb-' + id)?.classList.remove('active');
+}
+
+function maximizeWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  const ws = document.getElementById('workspace');
+  const wh = ws.offsetHeight;
+  const ww = ws.offsetWidth;
+  if (win.dataset.maximized === '1') {
+    win.style.width = win.dataset.ow;
+    win.style.height = win.dataset.oh;
+    win.style.top = win.dataset.ot;
+    win.style.left = win.dataset.ol;
+    win.dataset.maximized = '0';
+  } else {
+    win.dataset.ow = win.style.width;
+    win.dataset.oh = win.style.height;
+    win.dataset.ot = win.style.top;
+    win.dataset.ol = win.style.left;
+    win.style.width = ww + 'px';
+    win.style.height = wh + 'px';
+    win.style.top = '0px';
+    win.style.left = '0px';
+    win.dataset.maximized = '1';
+  }
+}
+
+function toggleWindow(id) {
+  const win = document.getElementById('win-' + id);
+  if (!win) return;
+  if (win.style.display === 'none' || !win.style.display) {
+    openWindow(id);
+  } else {
+    closeWindow(id);
+  }
+}
+
+function focusWindow(id) {
+  document.querySelectorAll('.window').forEach(w => w.classList.remove('focused'));
+  const win = document.getElementById('win-' + id);
+  if (win) { win.classList.add('focused'); win.style.zIndex = ++zCounter; }
+}
+
+// ─── DRAG ───
+let dragState = null;
+function startDrag(e, id) {
+  const el = document.getElementById(id);
+
+  // 🛑 FIX: prevent crash if element not found
+  if (!el) {
+    console.error("Drag failed: element not found →", id);
+    return;
+  }
+
+  e.preventDefault();
+
+  // Calculate initial offset
+  const rect = el.getBoundingClientRect();
+  const offsetX = e.clientX - rect.left;
+  const offsetY = e.clientY - rect.top;
+
+  function onMouseMove(e) {
+    el.style.left = (e.clientX - offsetX) + "px";
+    el.style.top = (e.clientY - offsetY) + "px";
+  }
+
+  function onMouseUp() {
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+  }
+
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mouseup", onMouseUp);
+}
+document.addEventListener('mousemove', e => {
+  if (!dragState) return;
+  const win = document.getElementById('win-' + dragState.id);
+  const ws = document.getElementById('workspace');
+  // Use the difference between current and start mouse positions to update location
+  const dx = e.clientX - dragState.startX;
+  const dy = e.clientY - dragState.startY;
+  const newLeft = dragState.origLeft + dx;
+  const newTop = dragState.origTop + dy;
+  win.style.left = Math.max(0, Math.min(newLeft, ws.offsetWidth - 80)) + 'px';
+  win.style.top = Math.max(0, Math.min(newTop, ws.offsetHeight - 40)) + 'px';
+}); // Passive flag removed to ensure preventDefault() works during drag operations
+document.addEventListener('mouseup', () => dragState = null);
+
+// ─── ICON SELECTION ───
+function selectIcon(el) {
+  document.querySelectorAll('.desk-icon').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ─── PROJECT DETAIL ───
+function openProjectDetail(key) {
+  const p = projects[key];
+  if (!p) return;
+  const win = document.getElementById('win-projdetail');
+  document.getElementById('projdetail-title').textContent = p.title.toUpperCase();
+
+  const deployBlock = p.deployUrl ? `
+    <div class="pd-deploy">
+      <div class="pd-deploy-bar">
+        <div class="pd-deploy-bar-dot"></div>
+        PRODUCTION DEPLOYMENT · LIVE
+      </div>
+      <div class="pd-deploy-body">
+        <div class="pd-deploy-line">
+          <span class="pd-deploy-prompt">$</span>
+          <span class="pd-deploy-cmd">curl -I <a href="${p.deployUrl}" target="_blank" class="pd-deploy-url">${p.deployLabel}</a></span>
+        </div>
+        <div class="pd-deploy-line">
+          <span class="pd-deploy-prompt"> </span>
+          <span class="pd-deploy-out">HTTP/2 200 · ${p.deployHost}</span>
+        </div>
+        <div class="pd-launch">
+          <a href="${p.deployUrl}" target="_blank" class="pd-launch-btn">
+            LAUNCH APP <span class="pd-launch-btn-arrow">→</span>
+          </a>
+          <a href="${p.github}" target="_blank" class="pd-github-btn">GITHUB</a>
+        </div>
+      </div>
+    </div>` : `
+    <div class="pd-github-only">
+      <a href="${p.github}" target="_blank" class="pd-github-btn">VIEW ON GITHUB →</a>
+    </div>`;
+
+  document.getElementById('projdetail-body').innerHTML = `
+    <div class="proj-detail">
+      <div class="proj-file-tag ${p.tagClass} pd-tag">${p.tag}</div>
+      <div class="pd-title">${p.title}</div>
+      <div class="pd-subtitle">${p.subtitle}</div>
+      <div class="pd-desc">${p.desc}</div>
+      <div class="pd-bullets">
+        ${p.bullets.map(b => `<div class="pd-bullet"><span class="pd-bullet-icon">›</span><span>${b}</span></div>`).join('')}
+      </div>
+      <div class="pd-stack">${p.stack.map(t => `<span class="pd-tech">${t}</span>`).join('')}</div>
+      ${deployBlock}
+    </div>`;
+  win.style.display = 'flex';
+  focusWindow('projdetail');
+}
+
+// ─── SKILLS ANIMATION ───
+function animateSkillBars() {
+  setTimeout(() => {
+    document.querySelectorAll('.skill-fill').forEach(el => {
+      el.style.width = el.dataset.w + '%';
     });
-  </script>
+  }, 100);
+}
+
+// ─── TERMINAL ───
+let terminalInitialized = false;
+function initTerminalWindow() {
+  if (terminalInitialized) return;
+  terminalInitialized = true;
+  const el = document.getElementById('terminal-content-win');
+  const lines = [
+    { type: 'cmd', text: 'whoami' },
+    { type: 'out', text: 'abhishek-choudhary · SDE & AI Systems Engineer · Gurugram, India', cls: 'info' },
+    { type: 'cmd', text: 'cat education.txt' },
+    { type: 'out', text: 'VIT Bhopal University · B.Tech CS (AI-ML) · CGPA: 8.76 · 2022–2026', cls: 'success' },
+    { type: 'cmd', text: 'cat experience.log' },
+    { type: 'out', text: 'Cynapse AI · AI/ML Intern · Oct 2025 – Feb 2026', cls: 'info' },
+    { type: 'out', text: '→ 100K+ daily events · 40% latency reduction · Gen AI agent roadmap', cls: '' },
+    { type: 'cmd', text: 'ls projects/' },
+    { type: 'out', text: 'phoenix/  smart-screener/  mancala-game/  mess-mgmt/  sales-agent/  gmail-agent/', cls: '' },
+    { type: 'cmd', text: 'cat phoenix/pipeline.txt' },
+    { type: 'out', text: 'Classify → Decide → Mutate → Validate → Human Approval', cls: 'warn' },
+    { type: 'out', text: '[WIP] Human authority over AI at every merge step', cls: 'warn' },
+    { type: 'cmd', text: 'echo $STACK' },
+    { type: 'out', text: 'Java17 SpringBoot3 Python Gemini-API Pinecone MongoDB TensorFlow Docker AWS-EC2', cls: 'info' },
+    { type: 'cmd', text: 'echo $STATUS' },
+    { type: 'out', text: 'Available for SDE/AI roles · June 2026 · abhi1312choudhary@gmail.com', cls: 'success' },
+  ];
+  let i = 0;
+  function printLine() {
+    if (i >= lines.length) {
+      el.innerHTML += `<div class="t-input-line"><span class="t-prompt">$</span> <span class="t-cursor"></span></div>`;
+      return;
+    }
+    const l = lines[i++];
+    if (l.type === 'cmd') {
+      const div = document.createElement('div');
+      div.className = 't-line';
+      div.innerHTML = `<span class="t-prompt">$</span> <span class="t-cmd"></span>`;
+      el.appendChild(div);
+      const cmdEl = div.querySelector('.t-cmd');
+      let ci = 0;
+      const typer = setInterval(() => {
+        cmdEl.textContent += l.text[ci++];
+        if (ci >= l.text.length) { clearInterval(typer); setTimeout(printLine, 200); }
+      }, 35);
+    } else {
+      const div = document.createElement('div');
+      div.className = 't-line';
+      div.innerHTML = `<span class="t-out ${l.cls||''}">${l.text}</span>`;
+      el.appendChild(div);
+      el.scrollTop = el.scrollHeight;
+      setTimeout(printLine, 80);
+    }
+  }
+  setTimeout(printLine, 300);
+}
+
+// ─── CMD PALETTE ───
+const cmdItems = [
+  { label: 'Open Identity', icon: '👤', action: () => openWindow('identity') },
+  { label: 'Open Projects', icon: '📁', action: () => openWindow('projects') },
+  { label: 'Open Skills', icon: '⚡', action: () => openWindow('skills') },
+  { label: 'Open Experience', icon: '💼', action: () => openWindow('experience') },
+  { label: 'Open Terminal', icon: '⬛', action: () => openWindow('terminal') },
+  { label: 'Open README', icon: '📄', action: () => openWindow('readme') },
+  { label: 'Open Contact', icon: '📡', action: () => openWindow('contact') },
+  { label: 'View Phoenix Project', icon: '🔥', action: () => { openWindow('projects'); setTimeout(()=>openProjectDetail('phoenix'),200); } },
+  { label: 'Launch Mancala Game (Live)', icon: '🟢', action: () => window.open('https://mancala-game.me/','_blank') },
+  { label: 'Launch Mess App (Live)', icon: '🟢', action: () => window.open('https://mess-application-front-end-angular.vercel.app/login','_blank') },
+  { label: 'View Resume', icon: '◎', action: () => window.open('https://raw.githubusercontent.com/abh1shekChoudhary/Resume/main/Abhishek_Choudhary_SDE_AIML.pdf','_blank') },
+  { label: 'Email Abhishek', icon: '✉', action: () => window.location.href='mailto:abhi1312choudhary@gmail.com' },
+  { label: 'GitHub Profile', icon: '⌥', action: () => window.open('https://github.com/abh1shekChoudhary','_blank') },
+];
+
+function toggleCmdPalette() {
+  const p = document.getElementById('cmd-palette');
+  p.classList.toggle('open');
+  if (p.classList.contains('open')) {
+    document.getElementById('cmd-input').value = '';
+    renderCmdResults('');
+    setTimeout(() => document.getElementById('cmd-input').focus(), 50);
+  }
+  closeCtxMenu();
+}
+
+function renderCmdResults(query) {
+  const filtered = cmdItems.filter(i => i.label.toLowerCase().includes(query.toLowerCase()));
+  document.getElementById('cmd-results').innerHTML = filtered.map((item, idx) =>
+    `<div class="cmd-item" onclick="runCmd(${cmdItems.indexOf(item)})">
+      <span class="cmd-item-icon">${item.icon}</span>
+      <span class="cmd-item-label">${item.label}</span>
+      <span class="cmd-item-hint">↵</span>
+    </div>`
+  ).join('');
+}
+
+function runCmd(idx) {
+  cmdItems[idx].action();
+  document.getElementById('cmd-palette').classList.remove('open');
+}
+
+document.getElementById('cmd-input').addEventListener('input', e => renderCmdResults(e.target.value));
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); toggleCmdPalette(); }
+  if (e.key === 'Escape') {
+    document.getElementById('cmd-palette').classList.remove('open');
+    closeCtxMenu();
+  }
+});
+
+// ─── CONTEXT MENU ───
+document.getElementById('workspace').addEventListener('contextmenu', e => {
+  e.preventDefault();
+  const menu = document.getElementById('ctx-menu');
+  menu.style.left = e.clientX + 'px';
+  menu.style.top = e.clientY + 'px';
+  menu.classList.add('open');
+});
+document.addEventListener('click', closeCtxMenu);
+function closeCtxMenu() { document.getElementById('ctx-menu').classList.remove('open'); }
+
+// ─── NOTIFICATION ───
+let notifTimer;
+function showNotif(title, body) {
+  const n = document.getElementById('notif');
+  document.getElementById('notif-title').textContent = title;
+  document.getElementById('notif-body').textContent = body;
+  n.classList.add('show');
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(() => n.classList.remove('show'), 2500);
+}
+
+// ─── CLOCK ───
+function updateClock() {
+  const now = new Date();
+  document.getElementById('topbar-clock').textContent =
+    now.toLocaleTimeString('en-US', { hour12: false });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ─── FAKE CPU/MEM ───
+setInterval(() => {
+  const cpu = Math.floor(8 + Math.random() * 20);
+  const mem = Math.floor(30 + Math.random() * 20);
+  document.getElementById('cpu-val').textContent = cpu;
+  document.getElementById('mem-val').textContent = mem;
+  const cpuBar = document.getElementById('live-cpu-bar');
+  const memBar = document.getElementById('live-mem-bar');
+  const cpuPct = document.getElementById('live-cpu-pct');
+  const memPct = document.getElementById('live-mem-pct');
+  if (cpuBar) { cpuBar.style.width = cpu + '%'; cpuPct.textContent = cpu + '%'; }
+  if (memBar) { memBar.style.width = mem + '%'; memPct.textContent = mem + '%'; }
+}, 2000);
+
+// ─── BOOT SEQUENCE ───
+const bootLogs = [
+  'Initializing AC_OS kernel...',
+  'Loading identity module... [OK]',
+  'Mounting /projects filesystem... [OK]',
+  'Starting AI runtime engine... [OK]',
+  'Connecting to Cynapse AI cluster... [OK]',
+  'Spawning autonomous workflows... [OK]',
+  'All systems operational.',
+  'Welcome, Abhishek.'
+];
+
+async function runBoot() {
+  const logEl = document.getElementById('boot-log');
+  for (let i = 0; i < bootLogs.length; i++) {
+    await new Promise(r => setTimeout(r, i === 0 ? 1800 : 250));
+    logEl.textContent += bootLogs[i] + '\n';
+  }
+  await new Promise(r => setTimeout(r, 500));
+  document.getElementById('boot').style.animation = 'fadeOut 0.6s forwards';
+  await new Promise(r => setTimeout(r, 600));
+  document.getElementById('boot').style.display = 'none';
+  document.getElementById('desktop').classList.add('visible');
+  setTimeout(() => {
+    showNotif('WELCOME', 'AC_OS loaded. Press ⌘K for command palette.');
+  }, 800);
+}
+runBoot();
+
+// Window click to focus
+document.querySelectorAll('.window').forEach(win => {
+  win.addEventListener('mousedown', () => {
+    const id = win.id.replace('win-', '');
+    focusWindow(id);
+  });
+});
+</script>
 </body>
 </html>
